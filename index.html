@@ -37,555 +37,367 @@
             height: 100vh;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
         }
 
-        /* AUTH SCREEN (FULLSCREEN OVERLAY) */
-        #authScreen {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at 50% 10%, #e0f2fe 0%, #f8fafc 60%, #e2e8f0 100%);
-            z-index: 1000;
+        /* HEADER / TOP NAVBAR */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            padding: 10px 24px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 900px;
-            background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-lg);
-            display: grid;
-            grid-template-columns: 1.1fr 1.3fr;
-            overflow: hidden;
-        }
-
-        .auth-banner {
-            background: linear-gradient(145deg, #0284c7, #0d9488);
-            padding: 36px 30px;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
             justify-content: space-between;
-        }
-
-        .auth-badge {
-            background: rgba(255, 255, 255, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
-        .auth-hero-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 10px;
-        }
-
-        .auth-hero-desc {
-            font-size: 0.88rem;
-            opacity: 0.92;
-            line-height: 1.5;
-        }
-
-        .auth-features {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .auth-feat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-
-        .auth-feat-icon {
-            width: 24px;
-            height: 24px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-        }
-
-        .auth-form-side {
-            padding: 36px 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            justify-content: center;
-        }
-
-        .auth-tabs {
-            display: flex;
-            border-bottom: 1.5px solid var(--card-border);
-            gap: 14px;
-            margin-bottom: 6px;
-        }
-
-        .auth-tab {
-            padding: 8px 4px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-bottom: 2.5px solid transparent;
-            margin-bottom: -1.5px;
-            transition: all 0.2s;
-        }
-
-        .auth-tab.active {
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .role-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 6px;
-        }
-
-        .role-card {
-            background: #f8fafc;
-            border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .role-card:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            transform: translateY(-1px);
-        }
-
-        .role-avatar {
-            font-size: 1.5rem;
-        }
-
-        .role-name {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .role-desc {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        .auth-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .auth-input-group label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--text-muted);
-        }
-
-        .auth-input {
-            background: #f8fafc;
-            border: 1.5px solid var(--card-border);
-            color: var(--text-main);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .auth-input:focus {
-            border-color: var(--primary);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-        }
-
-        .btn-auth-submit {
-            background: var(--primary);
-            color: #ffffff;
-            border: none;
-            padding: 11px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
-            transition: all 0.2s;
-        }
-
-        .btn-auth-submit:hover {
-            background: #0369a1;
-        }
-
-        /* MAIN APP LAYOUT */
-        aside {
-            width: 290px;
-            background: var(--sidebar-bg);
-            border-right: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-            padding: 22px 18px;
-            gap: 18px;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.02);
-            z-index: 10;
+            box-shadow: var(--shadow-sm);
+            z-index: 50;
         }
 
         .brand-box {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--card-border);
         }
 
         .brand-logo {
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, var(--primary), var(--teal));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.35rem;
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+            font-size: 1.3rem;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
         }
 
-        .brand-title h2 { font-size: 1.2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.3px; }
-        .brand-title p { font-size: 0.72rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
 
-        .nav-list {
+        .brand-subtitle {
+            font-size: 0.72rem;
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        /* 4-PORTAL ROLE SWITCHER */
+        .portal-nav {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 12px;
+            gap: 4px;
+            border: 1px solid var(--card-border);
         }
 
-        .nav-btn {
+        .portal-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .portal-tab:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .portal-tab.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #cbd5e1;
+        }
+
+        .portal-tab.active .badge-count {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .badge-count {
+            background: #e2e8f0;
+            color: var(--text-muted);
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 0.68rem;
+            font-weight: 800;
+        }
+
+        /* HEADER CONTROLS */
+        .header-actions {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 14px;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
         }
 
-        .nav-btn:hover {
-            background: #f1f5f9;
-            color: var(--text-main);
-        }
-
-        .nav-btn.active {
-            background: var(--primary-light);
-            color: var(--primary);
-            border-color: rgba(2, 132, 199, 0.3);
-        }
-
-        .nav-icon { font-size: 1.2rem; }
-
-        /* User Profile Pill in Sidebar */
-        .user-pill {
+        .offline-toggle-btn {
             background: #f8fafc;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
-        .user-avatar-badge {
-            width: 36px;
-            height: 36px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-
-        .user-details h4 { font-size: 0.82rem; font-weight: 800; color: var(--text-main); }
-        .user-details p { font-size: 0.7rem; color: var(--text-muted); }
-
-        .btn-logout {
-            background: none;
-            border: none;
-            color: var(--red);
+            padding: 6px 12px;
+            border-radius: 8px;
             font-size: 0.75rem;
             font-weight: 700;
-            cursor: pointer;
-            padding: 4px 6px;
-            border-radius: 4px;
-        }
-
-        .btn-logout:hover { background: var(--red-light); }
-
-        .sync-card {
-            background: #f8fafc;
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .sync-head {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--text-main);
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .dot-pulse {
-            width: 9px;
-            height: 9px;
+        .status-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--green);
             box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
         }
 
-        .btn-toggle-net {
-            background: #ffffff;
-            color: var(--text-main);
-            border: 1px solid var(--card-border);
-            padding: 5px 8px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s;
-        }
-
-        .btn-toggle-net:hover { background: #f1f5f9; }
-
-        /* Main Body Area */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            background: #f8fafc;
-        }
-
-        header {
-            padding: 16px 32px;
-            background: #ffffff;
-            border-bottom: 1px solid var(--card-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        }
-
-        .head-info h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
-        .head-info p { font-size: 0.8rem; color: var(--text-muted); }
-
-        .head-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .lang-select {
-            background: #ffffff;
-            color: var(--primary);
-            border: 1px solid var(--card-border);
-            padding: 6px 12px;
+        .sos-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #ffffff;
+            border: none;
+            padding: 7px 14px;
             border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 700;
+            font-size: 0.78rem;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn {
-            background: #ffffff;
-            color: var(--text-main);
-            border: 1px solid var(--card-border);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+            animation: pulse-red 2s infinite;
         }
 
-        .btn:hover { background: #f1f5f9; }
-        
-        .btn-primary { 
-            background: var(--primary); 
-            border-color: var(--primary); 
-            color: #ffffff;
-            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
-        }
-        .btn-primary:hover { background: #0369a1; }
-
-        .btn-sos {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            border: 1px solid #b91c1c;
-            color: #ffffff;
-            font-weight: 800;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
-            animation: pulse-sos 2s infinite;
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
 
-        @keyframes pulse-sos {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
-        }
-
-        .content {
-            padding: 24px 32px;
+        /* MAIN VIEWPORT */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* Stat Grid */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 16px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-        .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
-        .stat-sub { font-size: 0.75rem; color: var(--green); font-weight: 600; }
-
-        /* Section Panels */
-        .panel {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 24px;
-            display: flex;
+        /* PORTAL SECTIONS */
+        .portal-pane {
+            display: none;
             flex-direction: column;
             gap: 18px;
+        }
+
+        .portal-pane.active {
+            display: flex;
+        }
+
+        /* CARDS & PANELS */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
             box-shadow: var(--shadow-sm);
         }
 
-        .panel-header {
+        .card-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 12px;
         }
 
-        .panel-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
 
-        /* Pictorial Symptom Grid */
-        .pictorial-grid {
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* SYMPTOM CARDS GRID */
+        .symptom-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
         }
 
         .symptom-card {
-            background: #ffffff;
+            background: #f8fafc;
             border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 18px 14px;
+            border-radius: 14px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            gap: 8px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s;
+            gap: 6px;
         }
 
         .symptom-card:hover {
             border-color: var(--primary);
-            transform: translateY(-2px);
             background: #f0f9ff;
+            transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
         .symptom-card.selected {
             border-color: var(--primary);
             background: var(--primary-light);
-            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25);
         }
 
         .symptom-icon { font-size: 2.2rem; }
-        .symptom-title { font-size: 0.92rem; font-weight: 700; color: var(--text-main); }
-        .symptom-vernacular { font-size: 0.8rem; color: var(--primary); font-weight: 700; }
-        .audio-wave { font-size: 0.72rem; color: var(--teal); font-weight: 600; }
+        .symptom-title { font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
+        .symptom-vernacular { font-size: 0.75rem; color: var(--primary); font-weight: 700; }
+        .symptom-audio { font-size: 0.68rem; color: var(--teal); font-weight: 600; display: flex; align-items: center; gap: 3px; }
 
-        /* Tables */
+        /* SMART VITALS GAUGES */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .vital-box {
+            background: #f8fafc;
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .vital-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .vital-input {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-main);
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .vital-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+        }
+
+        .vital-status {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .status-normal { background: var(--green-light); color: var(--green); }
+        .status-warning { background: var(--amber-light); color: var(--amber); }
+        .status-danger { background: var(--red-light); color: var(--red); }
+
+        /* BUTTONS */
+        .btn {
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0369a1;
+        }
+
+        .btn-teal {
+            background: var(--teal);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-teal:hover {
+            background: #0f766e;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            border: 1.5px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        /* TABLES */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
         }
 
         th {
             text-align: left;
-            padding: 12px 14px;
+            padding: 10px 14px;
             color: var(--text-muted);
             border-bottom: 1.5px solid var(--card-border);
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            font-weight: 700;
+            font-weight: 800;
             background: #f8fafc;
         }
 
         td {
-            padding: 14px;
+            padding: 12px 14px;
             border-bottom: 1px solid var(--card-border);
             color: var(--text-main);
         }
@@ -593,10 +405,10 @@
         tr:hover td { background: #f8fafc; }
 
         .badge-risk {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
             display: inline-block;
         }
 
@@ -604,45 +416,139 @@
         .badge-high { background: var(--amber-light); color: var(--amber); border: 1px solid #fcd34d; }
         .badge-normal { background: var(--green-light); color: var(--green); border: 1px solid #86efac; }
 
-        /* Form Layout */
-        .vitals-form {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            background: #f8fafc;
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
+        /* PRE-STICKERED MEDICINE POUCH VISUALIZER */
+        .pouch-preview-box {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
         }
 
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
-        .form-control {
+        .medicine-pouch {
+            width: 280px;
             background: #ffffff;
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 9px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            outline: none;
-            box-shadow: var(--shadow-sm);
-        }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15); }
-
-        /* JSON / FHIR Viewer */
-        .json-box {
-            background: #0f172a;
+            border: 2px solid #94a3b8;
+            border-radius: 14px;
             padding: 16px;
-            border-radius: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: #38bdf8;
-            overflow-x: auto;
-            max-height: 320px;
-            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
         }
 
-        /* Modals */
+        .pouch-seal {
+            background: #e2e8f0;
+            height: 10px;
+            border-radius: 4px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .pouch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .pouch-stickers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .sticker-badge {
+            background: #fef3c7;
+            border: 1.5px solid #f59e0b;
+            color: #92400e;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* RUNNER MOBILE VIEWPORT CONTAINER */
+        .mobile-simulator {
+            max-width: 420px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 8px solid #0f172a;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            height: 640px;
+        }
+
+        .mobile-notch {
+            background: #0f172a;
+            height: 24px;
+            width: 140px;
+            margin: 0 auto;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .mobile-screen {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* WHATSAPP MODAL SIMULATOR */
+        .whatsapp-chat-box {
+            background: #e5ddd5;
+            background-image: radial-gradient(#d1d7db 1px, transparent 1px);
+            background-size: 16px 16px;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 420px;
+            margin: 0 auto;
+            border: 1px solid #cbd5e1;
+        }
+
+        .whatsapp-bubble {
+            background: #ffffff;
+            border-radius: 12px;
+            border-top-left-radius: 2px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            font-size: 0.82rem;
+            line-height: 1.45;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .whatsapp-audio-player {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -657,526 +563,697 @@
         .modal-box {
             background: #ffffff;
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            width: 600px;
-            max-width: 90%;
-            padding: 26px;
+            border-radius: 20px;
+            width: 620px;
+            max-width: 92%;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 16px;
             box-shadow: var(--shadow-lg);
         }
+
+        /* JSON INSPECTOR */
+        .json-box {
+            background: #0f172a;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            max-height: 300px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- AUTH SCREEN OVERLAY -->
-    <div id="authScreen">
-        <div class="auth-container">
-            <!-- Left Info Banner -->
-            <div class="auth-banner">
-                <div>
-                    <span class="auth-badge">SIH 2026 • PS 26133</span>
-                    <h2 class="auth-hero-title">ArogyaMitr Health Portal</h2>
-                    <p class="auth-hero-desc">Decentralized Rural Healthcare Infrastructure & Voice-Guided Tele-Care Network.</p>
-                    
-                    <div class="auth-features">
-                        <div class="auth-feat-item">
-                            <span class="auth-feat-icon">✓</span> Gram Care Point Voice Kiosk (Inside Village)
-                        </div>
-                        <div class="auth-feat-item">
-                            <span class="auth-feat-icon">✓</span> 15-Min Medicine Dark Hub (Cluster Outskirts)
-                        </div>
-                        <div class="auth-feat-item">
-                            <span class="auth-feat-icon">✓</span> 1-Touch 108 Emergency SOS & GPS Radar
-                        </div>
-                        <div class="auth-feat-item">
-                            <span class="auth-feat-icon">✓</span> Ayushman Bharat (ABDM) ABHA ID Linkage
-                        </div>
-                    </div>
-                </div>
-
-                <div style="font-size: 0.72rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px;">
-                    🏛️ Government of Maharashtra • Maharashtra State Innovation Society
-                </div>
-            </div>
-
-            <!-- Right Login Form Side -->
-            <div class="auth-form-side">
-                <div class="auth-tabs">
-                    <div class="auth-tab active" id="tabRoleLogin" onclick="switchAuthTab('role')">⚡ Fast Role Login (Demo)</div>
-                    <div class="auth-tab" id="tabAbhaLogin" onclick="switchAuthTab('abha')">🆔 ABHA / OTP Login</div>
-                </div>
-
-                <!-- Fast Role Selection (For Hackathon Demos) -->
-                <div id="roleLoginView">
-                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Select a user profile to enter the portal:</p>
-                    
-                    <div class="role-grid">
-                        <div class="role-card" onclick="loginAs('Savita Tai (ASHA)', 'Laheri Gram Care Point', 'ASHA Health Volunteer', '👩‍⚕️')">
-                            <div class="role-avatar">👩‍⚕️</div>
-                            <div>
-                                <div class="role-name">ASHA Volunteer</div>
-                                <div class="role-desc">Village Kiosk Intake</div>
-                            </div>
-                        </div>
-
-                        <div class="role-card" onclick="loginAs('Dr. Vivek Deshmukh', 'Aheri Cluster PHC', 'Medical Officer', '👨‍⚕️')">
-                            <div class="role-avatar">👨‍⚕️</div>
-                            <div>
-                                <div class="role-name">MBBS Doctor</div>
-                                <div class="role-desc">Tele-Consult & e-Rx</div>
-                            </div>
-                        </div>
-
-                        <div class="role-card" onclick="loginAs('Nitin Patil', 'Outskirts Dark Hub', 'Supply Chain Pharmacist', '📦')">
-                            <div class="role-avatar">📦</div>
-                            <div>
-                                <div class="role-name">Dark Store Hub</div>
-                                <div class="role-desc">15-Min Medicine Depot</div>
-                            </div>
-                        </div>
-
-                        <div class="role-card" onclick="loginAs('Dr. Sanjay Shinde', 'District Civil Hospital', 'District Health Officer', '🏛️')">
-                            <div class="role-avatar">🏛️</div>
-                            <div>
-                                <div class="role-name">DHO / Admin</div>
-                                <div class="role-desc">ABDM & Spatial Radar</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ABHA / Mobile OTP View -->
-                <div id="abhaLoginView" style="display: none; flex-direction: column; gap: 12px;">
-                    <div class="auth-input-group">
-                        <label>14-Digit ABHA Number or Registered Mobile</label>
-                        <input type="text" class="auth-input" id="authAbhaInput" placeholder="e.g. 91-4589-2041-3912 or 9876543210" value="91-4589-2041-3912">
-                    </div>
-
-                    <div class="auth-input-group">
-                        <label>6-Digit Secure OTP</label>
-                        <input type="password" class="auth-input" id="authOtpInput" placeholder="Enter OTP (Default: 123456)" value="123456">
-                    </div>
-
-                    <button class="btn-auth-submit" onclick="submitAbhaLogin()">Verify & Login to Dashboard ➔</button>
-                    <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center;">⚡ Protected by ABDM Milestone 1, 2, 3 Security Standards</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sidebar Navigation -->
-    <aside>
+    <!-- TOP GLOBAL NAVBAR -->
+    <header>
         <div class="brand-box">
             <div class="brand-logo">🏥</div>
-            <div class="brand-title">
-                <h2>ArogyaMitr</h2>
-                <p>SIH 2026 • PS 26133</p>
+            <div>
+                <div class="brand-title">ArogyaMitr • आरोग्यमित्र</div>
+                <div class="brand-subtitle">Smart India Hackathon 2026 • PS ID: 26133 (Govt of Maharashtra)</div>
             </div>
         </div>
 
-        <nav class="nav-list">
-            <div class="nav-btn active" onclick="setTab('village')">
-                <span class="nav-icon">📍</span> Gram Care Point (Kiosk)
-            </div>
-            <div class="nav-btn" onclick="setTab('doctor')">
-                <span class="nav-icon">👨‍⚕️</span> Doctor Tele-Consult Desk
-            </div>
-            <div class="nav-btn" onclick="setTab('darkstore')">
-                <span class="nav-icon">📦</span> Outskirts Dark Hub
-            </div>
-            <div class="nav-btn" onclick="setTab('abdm')">
-                <span class="nav-icon">🆔</span> ABDM & FHIR R4 Bundle
-            </div>
+        <!-- 4-PORTAL ROLE SELECTOR -->
+        <nav class="portal-nav">
+            <button class="portal-tab active" id="tabBtn-clinic" onclick="setTab('clinic')">
+                👩‍⚕️ 1. Village Clinic Intake
+            </button>
+            <button class="portal-tab" id="tabBtn-doctor" onclick="setTab('doctor')">
+                👨‍⚕️ 2. Doctor Tele-Desk <span class="badge-count" id="badgeDoctorQueue">3</span>
+            </button>
+            <button class="portal-tab" id="tabBtn-darkhub" onclick="setTab('darkhub')">
+                📦 3. Dark Hub & Lab <span class="badge-count" id="badgeHubOrders">2</span>
+            </button>
+            <button class="portal-tab" id="tabBtn-runner" onclick="setTab('runner')">
+                🛵 4. Runner Mobile App
+            </button>
         </nav>
 
-        <div class="user-pill">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <div class="user-avatar-badge" id="userAvatar">👩‍⚕️</div>
-                <div class="user-details">
-                    <h4 id="userName">Savita Tai (ASHA)</h4>
-                    <p id="userRole">Laheri Gram Care Point</p>
-                </div>
-            </div>
-            <button class="btn-logout" onclick="logout()" title="Logout">Switch ⇄</button>
-        </div>
-
-        <div class="sync-card">
-            <div class="sync-head">
-                <span>0G / Offline Engine</span>
-                <span class="dot-pulse" id="netDot"></span>
-            </div>
-            <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.3;" id="netStatusText">
-                🟢 Live Sync (SQLite Active)
-            </div>
-            <button class="btn-toggle-net" onclick="toggleNetwork()">
-                ⚡ Toggle 0G Mode
+        <!-- HEADER RIGHT ACTIONS -->
+        <div class="header-actions">
+            <button class="offline-toggle-btn" id="offlineToggleBtn" onclick="toggleOfflineMode()">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="offlineStatusText">🟢 Cloud Sync</span>
+            </button>
+            <button class="btn btn-outline" style="padding:6px 10px; font-size:0.75rem;" onclick="openModal('fhirModal')">
+                🆔 ABDM FHIR
+            </button>
+            <button class="sos-btn" onclick="triggerSOS()">
+                🚨 1-TOUCH 108 SOS
             </button>
         </div>
-    </aside>
+    </header>
 
-    <!-- Main Content Area -->
+    <!-- MAIN VIEWPORT CONTENT -->
     <main>
-        <header>
-            <div class="head-info">
-                <h1 id="headerTitle">Gram Care Point: Vernacular Voice & Pictorial Kiosk</h1>
-                <p id="headerSubtitle">Laheri Sub-Centre, Bhamragad Block, Gadchiroli District (Tribal Zone)</p>
-            </div>
-            <div class="head-actions">
-                <select class="lang-select" id="langSelect" onchange="changeLanguage()">
-                    <option value="mr">मराठी (Marathi)</option>
-                    <option value="hi">हिंदी (Hindi)</option>
-                    <option value="en">English</option>
-                </select>
-                <button class="btn" style="background: var(--teal-light); border-color: var(--teal); color: var(--teal);" onclick="openAgentCallModal()">
-                    🤝 1-on-1 Sahayak Guide
-                </button>
-                <button class="btn btn-sos" onclick="triggerSOSModal()">
-                    🚨 1-Touch SOS
-                </button>
-            </div>
-        </header>
 
-        <div class="content">
-            <!-- Stat Bar -->
-            <div class="stat-grid">
-                <div class="stat-card">
-                    <div class="stat-label">Daily Triages</div>
-                    <div class="stat-val" id="statTriages">28</div>
-                    <div class="stat-sub">↑ 9 via Voice Kiosk</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Dispatched Prescriptions</div>
-                    <div class="stat-val" id="statRx">19</div>
-                    <div class="stat-sub">⚡ 15–30 Min Hub Delivery</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Cold-Chain Temperature</div>
-                    <div class="stat-val" style="color: var(--primary);">4.2°C</div>
-                    <div class="stat-sub">☀️ Solar Backup 100%</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Emergency Response Time</div>
-                    <div class="stat-val" style="color: var(--green);">11 Mins</div>
-                    <div class="stat-sub">108 Ambulance Tracked</div>
-                </div>
-            </div>
-
-            <!-- TAB 1: GRAM CARE POINT (VOICE & PICTORIAL KIOSK) -->
-            <div id="tab-village" class="panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <span>🗣️</span> Non-Literate Voice & Pictorial Symptom Selector
+        <!-- ========================================== -->
+        <!-- PORTAL 1: VILLAGE CLINIC INTAKE & KIOSK   -->
+        <!-- ========================================== -->
+        <div class="portal-pane active" id="portal-clinic">
+            
+            <!-- Quick Aadhaar & ABHA Profile Lookup Bar -->
+            <div class="card" style="padding: 16px 20px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 1.3rem;">🆔</span>
+                        <div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-main);">Aadhaar & Health Card Universal Intake</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">Aadhaar OTP or Clinic Camera FaceRD Biometric</div>
+                        </div>
                     </div>
-                    <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">🔊 Tap any icon to hear audio prompt</span>
+
+                    <!-- Quick Demo Patient Switcher -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">⚡ Demo Profiles:</span>
+                        <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="quickSelectPatient('918842194055')">
+                            👨‍🌾 Baburao (Malaria)
+                        </button>
+                        <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="quickSelectPatient('914589204139')">
+                            🤰 Sunita (Maternal Hb)
+                        </button>
+                        <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="quickSelectPatient('913321908744')">
+                            👩 Anandi (No Card Yet)
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Pictorial Symptom Grid -->
-                <div class="pictorial-grid">
-                    <div class="symptom-card" onclick="selectSymptom('Chest Pain / Cardiac', 'छातीत दुखणे आणि धाप लागणे', this)">
-                        <div class="symptom-icon">🫀</div>
-                        <div class="symptom-title">Chest Pain</div>
-                        <div class="symptom-vernacular">छातीत दुखणे</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; margin-top: 14px;">
+                    <div style="display: flex; gap: 6px;">
+                        <input type="text" id="inputAadhaar" class="vital-input" placeholder="Enter 12-Digit Aadhaar #" value="9188-4219-4055">
+                        <button class="btn btn-primary" style="padding: 8px 12px; font-size: 0.78rem;" onclick="verifyAadhaar('otp')">
+                            🔑 Verify OTP
+                        </button>
+                        <button class="btn btn-teal" style="padding: 8px 12px; font-size: 0.78rem;" onclick="verifyAadhaar('face')">
+                            📸 FaceRD
+                        </button>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Pregnancy / Maternal', 'गर्भवती तपासणी आणि काळजी', this)">
-                        <div class="symptom-icon">🤰</div>
-                        <div class="symptom-title">Pregnancy Checkup</div>
-                        <div class="symptom-vernacular">गर्भवती काळजी</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                    <div id="authStatusBadge" style="display: flex; align-items: center; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; color: #15803d;">
+                        ✅ Verified ABHA Card: 91-8842-1940-5511 (Baburao Madavi)
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Child Health & High Fever', 'लहान मुलांचा ताप आणि थंडी', this)">
-                        <div class="symptom-icon">👶</div>
-                        <div class="symptom-title">Child Health & Fever</div>
-                        <div class="symptom-vernacular">मुलांचा ताप</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                    <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                        <button class="btn btn-outline" style="font-size: 0.78rem;" onclick="openModal('sahayakModal')">
+                            🤝 1-on-1 Sahayak Video Guide
+                        </button>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Breathlessness / Respiratory', 'श्वास घेण्यास त्रास आणि खोकला', this)">
-                        <div class="symptom-icon">🫁</div>
-                        <div class="symptom-title">Breathing Issue</div>
-                        <div class="symptom-vernacular">श्वास घेण्यास त्रास</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                </div>
+            </div>
+
+            <!-- Zero-Typing Vernacular Pictorial Symptoms -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title"><span>🗣️</span> Zero-Typing Vernacular Voice & Pictorial Symptom Selector</div>
+                        <div class="card-desc">Tap any picture to hear Marathi voice prompt (`mr-IN`) or speak symptoms directly.</div>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Malaria & Chills', 'हिवताप आणि अंगदुखी', this)">
+                    <button class="btn btn-outline" style="font-size: 0.75rem;" onclick="triggerVoiceInput()">
+                        🎤 Speak Marathi (माईक)
+                    </button>
+                </div>
+
+                <div class="symptom-grid">
+                    <div class="symptom-card selected" onclick="selectSymptom('Malaria & Chills', 'हिवताप आणि अंगदुखी', this)">
                         <div class="symptom-icon">🦟</div>
                         <div class="symptom-title">Malaria / Chills</div>
                         <div class="symptom-vernacular">हिवताप व थंडी</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Blood Pressure & Sugar', 'रक्तदाब आणि साखर तपासणी', this)">
-                        <div class="symptom-icon">🩸</div>
-                        <div class="symptom-title">BP & Sugar Check</div>
-                        <div class="symptom-vernacular">रक्तदाब व साखर</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                    <div class="symptom-card" onclick="selectSymptom('Maternal Care & Anemia', 'गरोदरपण आणि अशक्तपणा तपासणी', this)">
+                        <div class="symptom-icon">🤰</div>
+                        <div class="symptom-title">Maternal & Anemia</div>
+                        <div class="symptom-vernacular">गरोदरपण / Hb</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('Severe Snakebite / Injury', 'सर्पदंश किंवा गंभीर जखम', this)">
+                    <div class="symptom-card" onclick="selectSymptom('Cardiac & Chest Heaviness', 'छातीत दुखणे आणि धाप लागणे', this)">
+                        <div class="symptom-icon">🫀</div>
+                        <div class="symptom-title">Chest Pain / BP</div>
+                        <div class="symptom-vernacular">छातीत दुखणे / धाप</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Child Pyrexia & Cough', 'लहान मुलांचा ताप आणि खोकला', this)">
+                        <div class="symptom-icon">👶</div>
+                        <div class="symptom-title">Child Fever / Flu</div>
+                        <div class="symptom-vernacular">बालरोग ताप</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Snakebite & Trauma', 'सर्पदंश किंवा गंभीर दुखापत', this)">
                         <div class="symptom-icon">🐍</div>
                         <div class="symptom-title">Snakebite / Trauma</div>
-                        <div class="symptom-vernacular">सर्पदंश / अपघात</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                        <div class="symptom-vernacular">सर्पदंश आणीबाणी</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
                     </div>
-                    <div class="symptom-card" onclick="selectSymptom('General Checkup', 'सामान्य तपासणी आणि अशक्तपणा', this)">
-                        <div class="symptom-icon">💊</div>
-                        <div class="symptom-title">General Consultation</div>
-                        <div class="symptom-vernacular">सामान्य तपासणी</div>
-                        <div class="audio-wave">🔊 Play Audio</div>
+                    <div class="symptom-card" onclick="selectSymptom('Blood Sugar & Vitals', 'रक्तदाब आणि साखर तपासणी', this)">
+                        <div class="symptom-icon">🩸</div>
+                        <div class="symptom-title">General / Sugar</div>
+                        <div class="symptom-vernacular">साखर तपासणी</div>
+                        <div class="symptom-audio">🔊 Play Audio</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Clinical Vitals Input with Safety Ranges -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title"><span>📊</span> Frontline Clinical Vitals & On-Site Diagnostics</div>
+                        <div class="card-desc">Instant clinical safety validation with automated risk priority scoring.</div>
                     </div>
                 </div>
 
-                <!-- Assisted Vitals Form -->
-                <div class="panel-header" style="margin-top: 10px;">
-                    <div class="panel-title"><span>📋</span> Assisted Patient Vitals & Clinical Risk Calculation</div>
-                </div>
-                <div class="vitals-form">
-                    <div class="form-group">
-                        <label>Patient Full Name</label>
-                        <input type="text" id="v_name" class="form-control" value="Sunita Madavi">
+                <div class="vitals-grid">
+                    <div class="vital-box">
+                        <div class="vital-label">Blood Pressure</div>
+                        <input type="text" id="vital_bp" class="vital-input" value="130/85">
+                        <div class="vital-status status-warning" id="status_bp">Elevated BP</div>
                     </div>
-                    <div class="form-group">
-                        <label>Age & Gender</label>
-                        <input type="text" id="v_age_gender" class="form-control" value="24 / Female">
+                    <div class="vital-box">
+                        <div class="vital-label">Oxygen SpO2</div>
+                        <input type="number" id="vital_spo2" class="vital-input" value="97">
+                        <div class="vital-status status-normal" id="status_spo2">Optimal (≥95%)</div>
                     </div>
-                    <div class="form-group">
-                        <label>Village Name</label>
-                        <input type="text" id="v_village" class="form-control" value="Laheri (Gadchiroli)">
+                    <div class="vital-box">
+                        <div class="vital-label">Pulse (Heartbeat)</div>
+                        <input type="number" id="vital_pulse" class="vital-input" value="92">
+                        <div class="vital-status status-normal" id="status_pulse">92 bpm Normal</div>
                     </div>
-                    <div class="form-group">
-                        <label>Systolic / Diastolic BP (mmHg)</label>
-                        <input type="text" id="v_bp" class="form-control" value="160 / 100">
+                    <div class="vital-box">
+                        <div class="vital-label">Body Temp (°F)</div>
+                        <input type="number" step="0.1" id="vital_temp" class="vital-input" value="103.1">
+                        <div class="vital-status status-danger" id="status_temp">High Pyrexia 🔥</div>
                     </div>
-                    <div class="form-group">
-                        <label>Oxygen SpO2 (%)</label>
-                        <input type="number" id="v_spo2" class="form-control" value="94">
+                    <div class="vital-box">
+                        <div class="vital-label">Blood Glucose</div>
+                        <input type="number" id="vital_glucose" class="vital-input" value="112">
+                        <div class="vital-status status-normal" id="status_glucose">112 mg/dL</div>
                     </div>
-                    <div class="form-group">
-                        <label>Heart Pulse (bpm)</label>
-                        <input type="number" id="v_pulse" class="form-control" value="98">
-                    </div>
-                    <div class="form-group">
-                        <label>Body Temp (°F)</label>
-                        <input type="number" step="0.1" id="v_temp" class="form-control" value="99.2">
-                    </div>
-                    <div class="form-group">
-                        <label>Blood Glucose (mg/dL)</label>
-                        <input type="number" id="v_glucose" class="form-control" value="145">
+                    <div class="vital-box">
+                        <div class="vital-label">Hemoglobin (Hb)</div>
+                        <input type="number" step="0.1" id="vital_hb" class="vital-input" value="12.0">
+                        <div class="vital-status status-normal" id="status_hb">12.0 g/dL</div>
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: flex-end; gap: 12px;">
-                    <button class="btn btn-primary" onclick="submitTriage()">
-                        ✅ Record Triage & Calculate Risk Score
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid #f1f5f9;">
+                    <button class="btn btn-teal" onclick="drawClinicSample()">
+                        🩸 Draw Blood Sample at Clinic (Cold-Box 4°C)
                     </button>
-                </div>
-            </div>
-
-            <!-- TAB 2: DOCTOR TELE-CONSULT DESK -->
-            <div id="tab-doctor" class="panel" style="display: none;">
-                <div class="panel-header">
-                    <div class="panel-title"><span>👨‍⚕️</span> Village Tele-Consultation Queue & e-Prescription Dispatch</div>
-                    <span class="badge-risk badge-normal">Low-Bandwidth 15kbps WebRTC Active</span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Patient ID / ABHA</th>
-                            <th>Name & Village</th>
-                            <th>Clinical Risk Priority</th>
-                            <th>Vitals Summary</th>
-                            <th>Condition / Complaint</th>
-                            <th>Tele-Consult Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="doctorTableBody">
-                        <!-- Loaded dynamically -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- TAB 3: OUTSKIRTS DIAGNOSTIC & SUPPLY DARK HUB -->
-            <div id="tab-darkstore" class="panel" style="display: none;">
-                <div class="panel-header">
-                    <div class="panel-title"><span>📦</span> Outskirts Diagnostic & Supply Dark Hub — Pre-Stickered Dosage & Home Delivery</div>
-                    <button class="btn btn-primary" style="font-size: 0.78rem;" onclick="triggerDispatchDemo()">⚡ Fast Dispatch Runner</button>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
-                    <div>
-                        <h4 style="font-size: 0.9rem; margin-bottom: 10px; color: var(--primary);">📡 Auto-Received Prescriptions (Pre-Stickered & Home Dispatched)</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Rx ID</th>
-                                    <th>Patient</th>
-                                    <th>Prescribed Items</th>
-                                    <th>Status / ETA</th>
-                                </tr>
-                            </thead>
-                            <tbody id="prescriptionTableBody">
-                                <!-- Loaded dynamically -->
-                            </tbody>
-                        </table>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" onclick="submitTriage()">
+                            ✅ Record Triage & Connect Doctor ➔
+                        </button>
                     </div>
-                    <div>
-                        <h4 style="font-size: 0.9rem; margin-bottom: 10px; color: var(--teal);">🧪 Cold-Chain Pharmacy & Diagnostic Stock</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Medicine / Test</th>
-                                    <th>Category</th>
-                                    <th>Stock</th>
-                                    <th>Cold Storage</th>
-                                </tr>
-                            </thead>
-                            <tbody id="inventoryTableBody">
-                                <!-- Loaded dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 4: ABDM & FHIR R4 INSPECTOR -->
-            <div id="tab-abdm" class="panel" style="display: none;">
-                <div class="panel-header">
-                    <div class="panel-title"><span>🆔</span> Ayushman Bharat Digital Mission (ABDM) — HL7 FHIR R4 Inspector</div>
-                </div>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">
-                    Real-time interoperable FHIR R4 Document Bundle linking the patient's ABHA ID, clinical observations, and digital prescriptions:
-                </p>
-                <div class="json-box" id="fhirContent">
-                    // Select any patient from the triage desk to inspect their ABDM FHIR JSON bundle
                 </div>
             </div>
         </div>
+
+        <!-- ========================================== -->
+        <!-- PORTAL 2: DOCTOR TELE-CONSULT DESK        -->
+        <!-- ========================================== -->
+        <div class="portal-pane" id="portal-doctor">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px;">
+                
+                <!-- Left Side: Live Triage Queue -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title"><span>📋</span> Village Tele-Consult Queue & Risk Priority</div>
+                            <div class="card-desc">Patients awaiting tele-consultation from rural care points.</div>
+                        </div>
+                        <span class="badge-risk badge-normal">15 kbps WebRTC Ready</span>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient / ABHA</th>
+                                <th>Village & Vitals</th>
+                                <th>Risk Priority</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctorQueueTable">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right Side: 1-Click e-Prescription with Pictorial Stickers -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title"><span>✍️</span> Smart e-Prescription & Pictorial Dosage</div>
+                            <div class="card-desc">Pre-configured disease packs with visual stickers for non-literate patients.</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Quick Rural Clinical Packs:</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+                                <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="loadDiseaseKit('malaria')">
+                                    🦟 Malaria ACT Kit
+                                </button>
+                                <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="loadDiseaseKit('maternal')">
+                                    🤰 Maternal IFA + Calcium
+                                </button>
+                                <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="loadDiseaseKit('bp')">
+                                    🫀 Hypertension Care
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Prescribed Medicines:</label>
+                            <input type="text" id="doc_medicines" class="vital-input" value="Artesunate + Lumefantrine (ACT Blister), Paracetamol 650mg, ORS">
+                        </div>
+
+                        <!-- Pictorial Dosage Sticker Selector -->
+                        <div>
+                            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Pictorial Dosage Stickers (Applied at Dark Store):</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;">
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; background: #fef3c7; border: 1px solid #fde68a; padding: 6px 10px; border-radius: 6px;">
+                                    <input type="checkbox" id="stk_morning" checked> ☀️ Morning (सकाळ - 1 Tab)
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; background: #e0f2fe; border: 1px solid #bae6fd; padding: 6px 10px; border-radius: 6px;">
+                                    <input type="checkbox" id="stk_night" checked> 🌙 Night (रात्र - 1 Tab)
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; background: #dcfce7; border: 1px solid #bbf7d0; padding: 6px 10px; border-radius: 6px;">
+                                    <input type="checkbox" id="stk_food" checked> 🍽️ After Food (जेवणानंतर)
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 10px; border-radius: 6px;">
+                                    <input type="checkbox" id="stk_water" checked> 💧 With Warm Water
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Order Diagnostic Blood Tests (Dark Hub Lab):</label>
+                            <input type="text" id="doc_tests" class="vital-input" value="Rapid Malaria Antigen (RDT), Complete Blood Count (CBC)">
+                        </div>
+
+                        <button class="btn btn-primary" style="margin-top: 6px; justify-content: center;" onclick="doctorAuthorizeRx()">
+                            🚀 Authorize e-Rx & Route to Dark Store Hub
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- PORTAL 3: DARK HUB & DIAGNOSTIC LAB       -->
+        <!-- ========================================== -->
+        <div class="portal-pane" id="portal-darkhub">
+            
+            <!-- IoT Solar Cold-Chain Telemetry -->
+            <div class="card" style="background: linear-gradient(135deg, #0f172a, #1e293b); color: #ffffff; border-color: #334155;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <div style="font-size: 1rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                            <span>❄️</span> Outskirts Hub Solar Cold-Chain & Refrigerator Telemetry
+                        </div>
+                        <div style="font-size: 0.75rem; color: #94a3b8;">Highway Cluster Depot Serving 5 Hamlets (5 km radius)</div>
+                    </div>
+                    <div style="display: flex; gap: 14px;">
+                        <div style="background: rgba(255,255,255,0.08); padding: 6px 14px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;">TEMPERATURE</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: #4ade80;">4.2°C Active</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 6px 14px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;">SOLAR BATTERY</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: #38bdf8;">100% Backed</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 6px 14px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;">AVG RUNNER TIME</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: #facc15;">16 Mins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px;">
+                
+                <!-- Left: Incoming Prescriptions & Visual Pouch Visualizer -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title"><span>📦</span> Incoming Orders & Pre-Stickered Pouch Packing</div>
+                            <div class="card-desc">Auto-receives prescriptions from doctors for 15-minute doorstep dispatch.</div>
+                        </div>
+                        <button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="dispatchSelectedToRunner()">
+                            ⚡ Dispatch to Runner
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rx ID / Patient</th>
+                                <th>Medicines & Destination</th>
+                                <th>Status / ETA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hubPrescriptionsTable">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+
+                    <!-- Visual Pouch Preview -->
+                    <div class="pouch-preview-box" style="margin-top: 14px;">
+                        <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
+                            🏷️ Live Pre-Stickered Pouch Inspection (Dark Store Sealer)
+                        </div>
+                        <div class="medicine-pouch">
+                            <div class="pouch-seal"></div>
+                            <div class="pouch-header">
+                                <span>ArogyaMitr Home Pack</span>
+                                <span style="font-family: monospace;">RX-2026-801</span>
+                            </div>
+                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main);">
+                                👤 Baburao Madavi (Laheri Hamlet 3)
+                            </div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">
+                                💊 Artesunate ACT + Paracetamol 650mg
+                            </div>
+                            <div class="pouch-stickers" id="pouchStickerContainer">
+                                <div class="sticker-badge">☀️ सकाळ (1 Tab)</div>
+                                <div class="sticker-badge">🌙 रात्र (1 Tab)</div>
+                                <div class="sticker-badge">🍽️ जेवणानंतर</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Point-of-Care Pathology Lab Workbench -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title"><span>🧪</span> Point-of-Care Diagnostic Lab Workbench</div>
+                            <div class="card-desc">Process batch blood samples collected from village clinics.</div>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sample ID / Patient</th>
+                                <th>Test Requested</th>
+                                <th>Lab Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hubSamplesTable">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                        <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-main);">
+                            🔬 Enter Lab Test Findings:
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div>
+                                <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-muted);">Malaria RDT Result:</label>
+                                <select id="lab_malaria" class="vital-input" style="font-size: 0.82rem;">
+                                    <option value="Positive (P. Vivax)">Positive (P. Vivax)</option>
+                                    <option value="Negative" selected>Negative</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-muted);">Hemoglobin (Hb g/dL):</label>
+                                <input type="number" step="0.1" id="lab_hb" class="vital-input" value="12.4" style="font-size: 0.82rem;">
+                            </div>
+                        </div>
+                        <button class="btn btn-teal" style="justify-content: center; font-size: 0.8rem;" onclick="publishLabResult()">
+                            ✅ Publish Verified Report to Cloud & WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- PORTAL 4: RUNNER LAST-MILE MOBILE APP     -->
+        <!-- ========================================== -->
+        <div class="portal-pane" id="portal-runner">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+                
+                <!-- Left: Runner Phone Simulator -->
+                <div class="mobile-simulator">
+                    <div class="mobile-notch"></div>
+                    <div class="mobile-screen">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
+                            <div style="font-size: 0.85rem; font-weight: 800; color: var(--primary);">🛵 ArogyaMitr Runner App</div>
+                            <span style="font-size: 0.7rem; background: #dcfce7; color: #15803d; font-weight: 700; padding: 2px 6px; border-radius: 4px;">● GPS Active</span>
+                        </div>
+
+                        <div style="background: #ffffff; border: 1.5px solid var(--card-border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+                            <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700;">CURRENT TASK:</div>
+                            <div style="font-size: 0.92rem; font-weight: 800; color: var(--text-main);">🏠 Doorstep Delivery #RX-2026-801</div>
+                            <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">📍 Baburao Madavi • Laheri Hamlet 3</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">ETA to House: <strong>14 Mins (4.2 km)</strong></div>
+                        </div>
+
+                        <div style="background: #ffffff; border: 1.5px solid var(--card-border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+                            <div style="font-size: 0.75rem; font-weight: 800;">📦 Packet Verification Checklist:</div>
+                            <label style="font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
+                                <input type="checkbox" checked> ☀️ 🌙 Pictorial Stickers Verified
+                            </label>
+                            <label style="font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
+                                <input type="checkbox" checked> Cold-Chain Insulin/ASV in insulated box
+                            </label>
+                            <label style="font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
+                                <input type="checkbox" checked> 🩸 Clinic sample collection box equipped
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary" style="justify-content: center; padding: 12px;" onclick="confirmRunnerDelivery()">
+                            ✅ Confirm Doorstep Handover & Send WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Patient WhatsApp View Simulator -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title"><span>📱</span> Patient WhatsApp Delivery Simulator</div>
+                            <div class="card-desc">Delivers reports & audio notes to patients with zero app download required.</div>
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-chat-box">
+                        <div style="font-size: 0.7rem; text-align: center; color: #64748b; font-weight: 700;">
+                            TODAY • 10:32 AM
+                        </div>
+
+                        <div class="whatsapp-bubble">
+                            <div style="font-weight: 800; color: #075e54; font-size: 0.85rem;">
+                                🏥 ArogyaMitr Health Bot (महाराष्ट्र शासन)
+                            </div>
+                            <div id="whatsappMessageContent" style="color: #1e293b;">
+                                नमस्कार Baburao Madavi जी, तुमचे औषध आणि लॅब रिपोर्ट तयार आहेत. ☀️ सकाळी: 1 गोळी, 🌙 रात्री: 1 गोळी. रनर तुमच्या घरी 14 मिनिटांत पोहोचत आहे.
+                            </div>
+                            
+                            <!-- WhatsApp Voice Note Simulator -->
+                            <div class="whatsapp-audio-player">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <button onclick="playMarathiVoiceReport()" style="background: #22c55e; border: none; width: 28px; height: 28px; border-radius: 50%; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">
+                                        ▶
+                                    </button>
+                                    <div style="font-size: 0.72rem; font-weight: 700; color: #166534;">
+                                        🔊 Voice_Report_Marathi.mp3 (0:45)
+                                    </div>
+                                </div>
+                                <span style="font-size: 0.68rem; color: #16a34a; font-weight: 700;">10:32 AM</span>
+                            </div>
+
+                            <div style="display: flex; gap: 6px; margin-top: 4px;">
+                                <a href="javascript:void(0)" onclick="openModal('fhirModal')" style="background: #f1f5f9; padding: 6px 10px; border-radius: 6px; font-size: 0.72rem; color: var(--primary); text-decoration: none; font-weight: 700;">
+                                    📄 Download Lab Report (PDF)
+                                </a>
+                                <a href="javascript:void(0)" onclick="alert('📍 Live GPS Route to Doorstep: 3.8 km away • ETA 14 Mins')" style="background: #f1f5f9; padding: 6px 10px; border-radius: 6px; font-size: 0.72rem; color: var(--teal); text-decoration: none; font-weight: 700;">
+                                    🛵 Live Track Runner
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <!-- 1-Touch Emergency SOS Modal -->
+    <!-- ========================================== -->
+    <!-- MODALS & POPUPS                            -->
+    <!-- ========================================== -->
+
+    <!-- 1-Touch 108 Emergency SOS Modal -->
     <div class="modal-overlay" id="sosModal">
         <div class="modal-box" style="border-color: #fca5a5; text-align: center;">
             <div style="font-size: 3rem;">🚨</div>
-            <h2 style="color: var(--red); font-size: 1.4rem;">CRITICAL 108 EMERGENCY SOS BROADCASTED</h2>
-            <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.5;">
+            <h2 style="color: var(--red); font-size: 1.3rem;">CRITICAL 108 EMERGENCY SOS BROADCASTED</h2>
+            <p style="font-size: 0.88rem; color: var(--text-main); line-height: 1.5;">
                 GPS Coordinates: <strong>19.6542° N, 80.3541° E (Bhamragad Hamlet 4)</strong><br>
-                Nearest Outskirts Hub alerted. 108 Emergency Ambulance dispatched with oxygen & antivenom.
+                Nearest Outskirts Hub alerted. 108 Ambulance dispatched with oxygen & anti-venom.
             </p>
-            <div style="background: var(--red-light); border: 1px solid #fca5a5; border-radius: 10px; padding: 14px;">
-                <div style="font-size: 0.8rem; color: #991b1b; font-weight: 700;">ASSIGNED VEHICLE:</div>
+            <div style="background: var(--red-light); border: 1px solid #fca5a5; border-radius: 12px; padding: 14px;">
+                <div style="font-size: 0.75rem; color: #991b1b; font-weight: 700;">ASSIGNED VEHICLE:</div>
                 <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">MH-33-G-4412 (Aheri Base)</div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: var(--green); margin-top: 4px;">ETA: 11 MINS</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--green); margin-top: 4px;">ETA: 9 MINS</div>
             </div>
-            <button class="btn" style="background: #f1f5f9; justify-content: center;" onclick="closeModal('sosModal')">Dismiss Alarm</button>
+            <button class="btn btn-outline" style="justify-content: center;" onclick="closeModal('sosModal')">
+                Dismiss Alarm
+            </button>
         </div>
     </div>
 
-    <!-- 1-on-1 Sahayak Guide Call Modal -->
-    <div class="modal-overlay" id="agentModal">
+    <!-- 1-on-1 Sahayak Video Guide Modal -->
+    <div class="modal-overlay" id="sahayakModal">
         <div class="modal-box" style="border-color: #99f6e4;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="color: var(--teal); font-size: 1.15rem;">🤝 1-on-1 Live Health Sahayak Guide</h3>
-                <button onclick="closeModal('agentModal')" style="background:none; border:none; color:var(--text-muted); font-size:1.3rem; cursor:pointer;">&times;</button>
+                <h3 style="color: var(--teal); font-size: 1.1rem;">🤝 1-on-1 Live Health Sahayak Guide</h3>
+                <button onclick="closeModal('sahayakModal')" style="background:none; border:none; color:var(--text-muted); font-size:1.3rem; cursor:pointer;">&times;</button>
             </div>
-            <div style="background: #f8fafc; height: 190px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1.5px solid var(--card-border);">
-                <div style="font-size: 2.6rem; margin-bottom: 4px;">👩‍⚕️</div>
+            <div style="background: #f8fafc; height: 180px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1.5px solid var(--card-border);">
+                <div style="font-size: 2.5rem;">👩‍⚕️</div>
                 <div style="font-weight: 800; color: var(--text-main);">Smt. Savita Tai (Community Health Officer)</div>
-                <div style="font-size: 0.75rem; color: var(--green); font-weight: 700;">● Live WebRTC Audio/Video (15 kbps Ultra-Low Bandwidth)</div>
-                <div style="position: absolute; bottom: 10px; right: 10px; background: #ffffff; border: 1px solid var(--card-border); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--primary); font-weight: 700;">Language: Marathi</div>
+                <div style="font-size: 0.75rem; color: var(--green); font-weight: 700;">● Live 15 kbps WebRTC Call Active</div>
             </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
-                <em>"नमस्कार, मी आरोग्यमित्र सहायिका सविता. तुम्हाला किंवा कुटुंबियांना काय त्रास होत आहे? मी तुम्हाला डॉक्टरांशी बोलण्यासाठी आणि औषधे मागवण्यासाठी मदत करते."</em>
+            <p style="font-size: 0.82rem; color: var(--text-muted); background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+                <em>"नमस्कार, मी आरोग्यमित्र सहायिका सविता. तुम्हाला काय त्रास होत आहे? घाबरू नका, मी डॉक्टरांशी बोलवून औषधे घरपोच मागवून देते."</em>
             </p>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button class="btn" onclick="closeModal('agentModal')">End Assistance</button>
-                <button class="btn btn-primary" onclick="alert('Doctor connected via 1-on-1 Sahayak bridge!'); closeModal('agentModal');">Connect to MBBS Doctor ➔</button>
+                <button class="btn btn-outline" onclick="closeModal('sahayakModal')">End Call</button>
+                <button class="btn btn-primary" onclick="alert('Doctor connected via 1-on-1 Sahayak bridge!'); closeModal('sahayakModal'); setTab('doctor');">Connect to MBBS Doctor ➔</button>
             </div>
         </div>
     </div>
 
+    <!-- ABDM FHIR R4 Inspector Modal -->
+    <div class="modal-overlay" id="fhirModal">
+        <div class="modal-box" style="width: 700px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="color: var(--primary); font-size: 1.1rem;">🆔 ABDM HL7 FHIR R4 Document Bundle</h3>
+                <button onclick="closeModal('fhirModal')" style="background:none; border:none; color:var(--text-muted); font-size:1.3rem; cursor:pointer;">&times;</button>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted);">
+                Compliant Ayushman Bharat Digital Mission (ABDM) JSON document linking patient ABHA ID and clinical observations:
+            </p>
+            <div class="json-box" id="fhirJsonContent">
+                // Loading ABDM FHIR R4 Bundle...
+            </div>
+            <button class="btn btn-primary" style="align-self: flex-end;" onclick="closeModal('fhirModal')">
+                Close Inspector
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         let isOnline = true;
-        let selectedSymptomText = "General Checkup";
-        let patients = [];
-        let prescriptions = [];
-        let inventory = [];
+        let selectedSymptom = "Malaria & Chills";
+        let activePatient = {
+            id: "P-101",
+            name: "Baburao Madavi",
+            aadhaar: "9188-4219-4055",
+            abha_id: "91-8842-1940-5511",
+            has_card: true,
+            village: "Laheri Hamlet 3"
+        };
 
-        // Auth Logic
-        function switchAuthTab(tab) {
-            document.getElementById('tabRoleLogin').classList.toggle('active', tab === 'role');
-            document.getElementById('tabAbhaLogin').classList.toggle('active', tab === 'abha');
-            document.getElementById('roleLoginView').style.display = tab === 'role' ? 'block' : 'none';
-            document.getElementById('abhaLoginView').style.display = tab === 'abha' ? 'flex' : 'none';
-        }
-
-        function loginAs(name, location, role, avatar) {
-            document.getElementById('userName').textContent = name;
-            document.getElementById('userRole').textContent = location;
-            document.getElementById('userAvatar').textContent = avatar;
+        function setTab(tabName) {
+            document.querySelectorAll('.portal-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.portal-pane').forEach(p => p.classList.remove('active'));
             
-            // Auto switch tab based on role
-            if (role.includes('Doctor')) {
-                setTab('doctor');
-            } else if (role.includes('Pharmacist') || role.includes('Dark Store')) {
-                setTab('darkstore');
-            } else if (role.includes('DHO') || role.includes('Admin')) {
-                setTab('abdm');
-            } else {
-                setTab('village');
-            }
-
-            document.getElementById('authScreen').style.display = 'none';
+            const btn = document.getElementById(`tabBtn-${tabName}`);
+            const pane = document.getElementById(`portal-${tabName}`);
+            if (btn) btn.classList.add('active');
+            if (pane) pane.classList.add('active');
+            
             loadData();
         }
 
-        function submitAbhaLogin() {
-            const abha = document.getElementById('authAbhaInput').value;
-            loginAs(`User (${abha.slice(-4)})`, 'Verified via ABDM OTP', 'Verified Patient / Worker', '👤');
-        }
-
-        function logout() {
-            document.getElementById('authScreen').style.display = 'flex';
-        }
-
-        function setTab(tabName) {
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            ['village', 'doctor', 'darkstore', 'abdm'].forEach(t => {
-                const el = document.getElementById(`tab-${t}`);
-                if (el) el.style.display = t === tabName ? 'block' : 'none';
-            });
-            
-            const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.textContent.toLowerCase().includes(tabName === 'village' ? 'gram' : tabName === 'doctor' ? 'doctor' : tabName === 'darkstore' ? 'dark' : 'abdm'));
-            if (activeBtn) activeBtn.classList.add('active');
-
-            const headers = {
-                village: ['Gram Care Point: Vernacular Voice & Pictorial Kiosk', 'Laheri Sub-Centre, Bhamragad Block, Gadchiroli District (Tribal Zone)'],
-                doctor: ['Doctor Tele-Consultation Desk & Digital e-Prescription', 'Aheri Cluster Medical Officer Tele-Health Console'],
-                darkstore: ['Outskirts Cluster Diagnostic & Supply Dark Hub', 'Micro-Fulfillment Depot & Rapid Lab Testing (Serving 3–5 Villages)'],
-                abdm: ['Ayushman Bharat Digital Mission (ABDM) Standards Inspector', 'HL7 FHIR R4 Interoperability & ABHA ID Health Record Verification']
-            };
-            document.getElementById('headerTitle').textContent = headers[tabName][0];
-            document.getElementById('headerSubtitle').textContent = headers[tabName][1];
-        }
-
-        function toggleNetwork() {
+        function toggleOfflineMode() {
             isOnline = !isOnline;
-            const dot = document.getElementById('netDot');
-            const txt = document.getElementById('netStatusText');
+            const dot = document.getElementById('statusDot');
+            const txt = document.getElementById('offlineStatusText');
             if (isOnline) {
                 dot.style.background = '#16a34a';
-                dot.style.boxShadow = '0 0 8px rgba(22, 163, 74, 0.6)';
-                txt.innerHTML = '🟢 Live Sync (SQLite Active)';
-                alert('⚡ Network Reconnected: Local offline cache synced with Cloud PostgreSQL!');
+                txt.textContent = '🟢 Cloud Sync';
+                alert('⚡ 4G Reconnected: Local SQLite offline records auto-synced with ABDM Cloud!');
             } else {
                 dot.style.background = '#dc2626';
-                dot.style.boxShadow = '0 0 8px rgba(220, 38, 38, 0.6)';
-                txt.innerHTML = '🔴 0G Mode (IndexedDB Queue)';
-                alert('📡 Offline Mode Activated: Patient records & voice intakes are now stored securely in local SQLite!');
+                txt.textContent = '🔴 0G Mode (SQLite)';
+                alert('📡 0G Offline Mode Active: Intakes & vitals are saved locally and will auto-sync when online!');
             }
         }
 
-        function selectSymptom(name, vernacular, cardEl) {
+        async function verifyAadhaar(method) {
+            const num = document.getElementById('inputAadhaar').value;
+            try {
+                const res = await fetch('/api/auth/aadhaar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ aadhaar_number: num, auth_method: method })
+                });
+                const data = await res.json();
+                const badge = document.getElementById('authStatusBadge');
+                
+                if (data.has_existing_health_card) {
+                    badge.className = 'vital-status status-normal';
+                    badge.style.display = 'flex';
+                    badge.innerHTML = `✅ Verified ABHA Card: ${data.abha_id} (${data.citizen.name})`;
+                } else {
+                    badge.className = 'vital-status status-warning';
+                    badge.style.display = 'flex';
+                    badge.innerHTML = `👤 Aadhaar Verified (${data.citizen.name}) • Immediate Care Active`;
+                }
+
+                activePatient.name = data.citizen.name;
+                activePatient.aadhaar = data.citizen.aadhaar;
+                activePatient.abha_id = data.abha_id;
+                activePatient.has_card = data.has_existing_health_card;
+                activePatient.village = data.citizen.village;
+
+                alert(`🆔 Aadhaar verified via ${method.toUpperCase()}!\nPatient: ${data.citizen.name}\n${data.message}`);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function quickSelectPatient(aadhaarNum) {
+            document.getElementById('inputAadhaar').value = aadhaarNum;
+            verifyAadhaar('otp');
+        }
+
+        function selectSymptom(name, vernacular, el) {
             document.querySelectorAll('.symptom-card').forEach(c => c.classList.remove('selected'));
-            cardEl.classList.add('selected');
-            selectedSymptomText = name;
+            el.classList.add('selected');
+            selectedSymptom = name;
 
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -1187,121 +1264,35 @@
             }
         }
 
-        function changeLanguage() {
-            const l = document.getElementById('langSelect').value;
-            if (l === 'mr') alert('भाषा मराठीत निवडली गेली आहे. (Language set to Marathi)');
-            else if (l === 'hi') alert('भाषा हिंदी में सेट की गई है। (Language set to Hindi)');
-        }
-
-        async function loadData() {
-            try {
-                const resP = await fetch('/api/patients');
-                patients = await resP.json();
-                renderPatients();
-
-                const resRx = await fetch('/api/prescriptions');
-                prescriptions = await resRx.json();
-                renderPrescriptions();
-
-                const resI = await fetch('/api/inventory');
-                const invData = await resI.json();
-                inventory = invData.items || [];
-                renderInventory();
-
-                if (patients.length > 0) inspectFhir(patients[0].id);
-            } catch (e) {
-                console.log('Error loading data:', e);
+        function triggerVoiceInput() {
+            if ('speechSynthesis' in window) {
+                const utter = new SpeechSynthesisUtterance("कृपया तुमचे लक्षण सांगा");
+                utter.lang = 'mr-IN';
+                window.speechSynthesis.speak(utter);
             }
-        }
-
-        function renderPatients() {
-            const tb = document.getElementById('doctorTableBody');
-            tb.innerHTML = '';
-            document.getElementById('statTriages').textContent = patients.length;
-
-            patients.forEach(p => {
-                let badgeClass = 'badge-normal';
-                if (p.risk_level === 'Emergency') badgeClass = 'badge-emergency';
-                else if (p.risk_level === 'High Risk') badgeClass = 'badge-high';
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>
-                        <strong>${p.id}</strong><br>
-                        <span style="font-family:monospace; font-size:0.75rem; color:var(--primary);">${p.abha_id}</span>
-                    </td>
-                    <td><strong>${p.name}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${p.village} (${p.age}y / ${p.gender})</span></td>
-                    <td><span class="badge-risk ${badgeClass}">${p.risk_level}</span></td>
-                    <td style="font-family:monospace; font-size:0.78rem;">
-                        BP: ${p.vitals.bp}<br>SpO2: ${p.vitals.spo2} • Temp: ${p.vitals.temp}
-                    </td>
-                    <td style="font-size:0.82rem; max-width:200px;">${p.condition}</td>
-                    <td>
-                        <button class="btn btn-primary" style="padding:4px 8px; font-size:0.75rem;" onclick="issueRxDemo('${p.id}', '${p.name}')">
-                            🩺 Consult & Issue Rx
-                        </button>
-                    </td>
-                `;
-                tb.appendChild(tr);
-            });
-        }
-
-        function renderPrescriptions() {
-            const tb = document.getElementById('prescriptionTableBody');
-            tb.innerHTML = '';
-            document.getElementById('statRx').textContent = prescriptions.length;
-
-            prescriptions.forEach(rx => {
-                const stickersHtml = (rx.dosage_stickers || ['☀️ Morning (1 Tab)', '🌙 Night (1 Tab)'])
-                    .map(s => `<span style="display:inline-block; background:#fef3c7; color:#92400e; border:1px solid #fde68a; border-radius:4px; padding:2px 6px; font-size:0.68rem; font-weight:700; margin-right:4px; margin-top:3px;">🏷️ ${s}</span>`)
-                    .join('');
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-family:monospace; color:var(--primary);"><strong>${rx.rx_id}</strong></td>
-                    <td>
-                        <strong>${rx.patient_name}</strong><br>
-                        <span style="font-size:0.72rem; color:var(--teal); font-weight:700;">${rx.destination_outlet}</span>
-                    </td>
-                    <td style="font-size:0.78rem;">
-                        <div>${rx.medicines.join(', ')}</div>
-                        <div style="margin-top:4px;">${stickersHtml}</div>
-                    </td>
-                    <td><span class="badge-risk badge-high">${rx.status}</span></td>
-                `;
-                tb.appendChild(tr);
-            });
-        }
-
-        function renderInventory() {
-            const tb = document.getElementById('inventoryTableBody');
-            tb.innerHTML = '';
-            inventory.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${item.name}</strong></td>
-                    <td style="font-size:0.75rem;">${item.category}</td>
-                    <td><strong>${item.stock}</strong> ${item.unit}</td>
-                    <td><span style="font-size:0.75rem; color:var(--primary); font-family:monospace; font-weight:700;">${item.cold_chain}</span></td>
-                `;
-                tb.appendChild(tr);
-            });
+            alert('🎤 Listening to speech in Marathi (मराठी स्पीच ओळख चालू आहे)...');
         }
 
         async function submitTriage() {
-            const bpParts = document.getElementById('v_bp').value.split('/');
+            const bpVal = document.getElementById('vital_bp').value.split('/');
             const payload = {
-                name: document.getElementById('v_name').value || 'Village Patient',
-                age: 24,
-                gender: "Female",
-                village: document.getElementById('v_village').value || 'Laheri',
-                systolic_bp: parseInt(bpParts[0]) || 120,
-                diastolic_bp: parseInt(bpParts[1]) || 80,
-                spo2: parseInt(document.getElementById('v_spo2').value) || 97,
-                pulse: parseInt(document.getElementById('v_pulse').value) || 88,
-                temp: parseFloat(document.getElementById('v_temp').value) || 98.6,
-                blood_glucose: parseInt(document.getElementById('v_glucose').value) || 110,
-                symptoms: [selectedSymptomText]
+                name: activePatient.name,
+                age: 54,
+                gender: "Male",
+                village: activePatient.village,
+                district: "Gadchiroli",
+                phone: "+91 98231 44012",
+                aadhaar: activePatient.aadhaar,
+                abha_id: activePatient.abha_id,
+                has_card: activePatient.has_card,
+                systolic_bp: parseInt(bpVal[0]) || 130,
+                diastolic_bp: parseInt(bpVal[1]) || 85,
+                spo2: parseInt(document.getElementById('vital_spo2').value) || 97,
+                pulse: parseInt(document.getElementById('vital_pulse').value) || 92,
+                temp: parseFloat(document.getElementById('vital_temp').value) || 103.1,
+                blood_glucose: parseInt(document.getElementById('vital_glucose').value) || 112,
+                hb_level: parseFloat(document.getElementById('vital_hb').value) || 12.0,
+                symptoms: [selectedSymptom]
             };
 
             const res = await fetch('/api/triage', {
@@ -1310,20 +1301,57 @@
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
-            alert(`✅ Triage recorded for ${payload.name}!\nRisk Score: ${data.risk_assessment.level}\nFlags: ${data.risk_assessment.flags.join(', ') || 'None'}`);
+            alert(`✅ Triage recorded for ${payload.name}!\nClinical Risk: ${data.risk_assessment.level}\nPatient added to Doctor Tele-Consult Queue!`);
+            setTab('doctor');
+        }
+
+        async function drawClinicSample() {
+            const payload = {
+                patient_id: "P-101",
+                patient_name: activePatient.name,
+                village: activePatient.village,
+                test_requested: "Complete Blood Count (CBC) & Rapid Malaria RDT"
+            };
+
+            const res = await fetch('/api/clinic/draw-sample', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            alert(`🩸 Blood Sample Drawn & Placed in Clinic Cold-Box (4°C)!\nSample Barcode: ${data.sample.sample_id}\nQueued for Daily Batch Transport to Dark Hub.`);
             loadData();
         }
 
-        async function issueRxDemo(pId, pName) {
+        function loadDiseaseKit(kit) {
+            if (kit === 'malaria') {
+                document.getElementById('doc_medicines').value = "Artesunate + Lumefantrine (ACT Blister), Paracetamol 650mg, ORS";
+                document.getElementById('doc_tests').value = "Rapid Malaria Antigen (RDT), Complete Blood Count (CBC)";
+            } else if (kit === 'maternal') {
+                document.getElementById('doc_medicines').value = "Iron Folic Acid (IFA 100mg), Calcium + Vit D3, Protein Powder";
+                document.getElementById('doc_tests').value = "Hemoglobin (Hb) Repeat, Urine Protein";
+            } else if (kit === 'bp') {
+                document.getElementById('doc_medicines').value = "Amlodipine 5mg, Telmisartan 40mg";
+                document.getElementById('doc_tests').value = "Lipid Profile, Serum Creatinine";
+            }
+        }
+
+        async function doctorAuthorizeRx() {
+            const stickers = [];
+            if (document.getElementById('stk_morning').checked) stickers.push("☀️ Morning (सकाळ - 1 Tab)");
+            if (document.getElementById('stk_night').checked) stickers.push("🌙 Night (रात्र - 1 Tab)");
+            if (document.getElementById('stk_food').checked) stickers.push("🍽️ After Food (जेवणानंतर)");
+            if (document.getElementById('stk_water').checked) stickers.push("💧 With Warm Water");
+
             const payload = {
-                patient_id: pId,
-                patient_name: pName,
-                doctor_name: "Dr. Vivek Deshmukh (Medical Officer)",
-                medicines: ["Amoxicillin 500mg (10 Tabs)", "Paracetamol 650mg", "Oral Rehydration Salts (ORS)"],
-                diagnostic_tests: ["Complete Blood Count (CBC)"],
-                target_hub: "Outskirts Diagnostic & Supply Dark Hub",
-                destination_outlet: `🏠 Patient Doorstep Delivery (${pName}'s Home)`,
-                dosage_stickers: ["☀️ Morning (1 Tab After Food)", "🌙 Night (1 Tab After Food)"]
+                patient_id: "P-101",
+                patient_name: activePatient.name,
+                doctor_name: "Dr. Vivek Deshmukh (MBBS, DGO)",
+                medicines: document.getElementById('doc_medicines').value.split(','),
+                diagnostic_tests: document.getElementById('doc_tests').value.split(','),
+                target_hub: "Aheri Outskirts Cluster Dark Hub",
+                destination_outlet: `🏠 Patient Doorstep Delivery (${activePatient.village})`,
+                dosage_stickers: stickers
             };
 
             await fetch('/api/prescriptions', {
@@ -1331,38 +1359,138 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            alert(`🚀 e-Prescription auto-routed to Outskirts Dark Store for ${pName}!\nMedicines are packed with pre-applied pictorial dosage stickers and dispatched directly to patient doorstep!`);
-            loadData();
+
+            alert(`🚀 e-Prescription Authorized by Doctor!\nAuto-routed to Outskirts Dark Store for pre-stickered packaging & 15-min delivery.`);
+            setTab('darkhub');
         }
 
-        async function inspectFhir(patientId) {
-            try {
-                const res = await fetch(`/api/fhir/${patientId}`);
-                const data = await res.json();
-                document.getElementById('fhirContent').textContent = JSON.stringify(data, null, 2);
-            } catch (e) {
-                console.log(e);
+        async function publishLabResult() {
+            const payload = {
+                sample_id: "SMP-LAHERI-801",
+                test_result_text: "Malaria RDT Tested",
+                malaria_status: document.getElementById('lab_malaria').value,
+                hb_value: parseFloat(document.getElementById('lab_hb').value) || 12.4,
+                blood_sugar: 110,
+                findings: "Normal Hematology Profile • No Acute Parasitemia"
+            };
+
+            await fetch('/api/lab/submit-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            alert(`✅ Lab Report Published to Cloud & WhatsApp!\nPatient: ${activePatient.name}\nReport & Marathi voice note sent to WhatsApp.`);
+            setTab('runner');
+        }
+
+        function dispatchSelectedToRunner() {
+            alert('🛵 Runner Sandeep K. dispatched on e-Bike #04 with pre-stickered medicine pack!\nETA to Patient Doorstep: 14 Mins.');
+            setTab('runner');
+        }
+
+        function confirmRunnerDelivery() {
+            alert('✅ Doorstep Handover Confirmed by Runner!\nMedicines delivered to patient doorstep.\nReverse sample collection box updated.');
+            document.getElementById('whatsappMessageContent').textContent = `नमस्कार ${activePatient.name} जी, तुमची औषधे घरपोच पोहोचली आहेत. ☀️ सकाळी: 1 गोळी, 🌙 रात्री: 1 गोळी. कृपया वेळेवर औषध घ्या.`;
+        }
+
+        function playMarathiVoiceReport() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const text = `नमस्कार ${activePatient.name} जी, तुमचे रक्त अहवाल तयार आहेत. मलेरिया चाचणी निगेटिव्ह आहे. औषधे वेळेवर घ्या.`;
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'mr-IN';
+                window.speechSynthesis.speak(utter);
             }
         }
 
-        function triggerSOSModal() {
-            document.getElementById('sosModal').style.display = 'flex';
+        function triggerSOS() {
+            openModal('sosModal');
         }
 
-        function openAgentCallModal() {
-            document.getElementById('agentModal').style.display = 'flex';
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            if (id === 'fhirModal') loadFhir();
         }
 
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
         }
 
-        function triggerDispatchDemo() {
-            alert('🛵 Runner dispatched from Outskirts Hub with pre-stickered medicine pouches!\nEstimated Arrival at Patient Doorstep: 14 Mins.');
+        async function loadFhir() {
+            try {
+                const res = await fetch('/api/fhir/patient/P-101');
+                const data = await res.json();
+                document.getElementById('fhirJsonContent').textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        async function loadData() {
+            try {
+                // Load Patients for Doctor Queue
+                const resP = await fetch('/api/patients');
+                const patients = await resP.json();
+                const docTb = document.getElementById('doctorQueueTable');
+                if (docTb) {
+                    docTb.innerHTML = '';
+                    patients.forEach(p => {
+                        let badge = 'badge-normal';
+                        if (p.risk_level === 'Emergency') badge = 'badge-emergency';
+                        else if (p.risk_level === 'High Risk') badge = 'badge-high';
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>${p.name}</strong><br><span style="font-size:0.7rem; color:var(--primary); font-family:monospace;">${p.abha_id || p.aadhaar}</span></td>
+                            <td><span style="font-size:0.75rem;">${p.village}</span><br><span style="font-size:0.7rem; color:var(--text-muted);">BP: ${p.vitals.bp} • SpO2: ${p.vitals.spo2}</span></td>
+                            <td><span class="badge-risk ${badge}">${p.risk_level}</span></td>
+                            <td><button class="btn btn-primary" style="padding:4px 8px; font-size:0.72rem;" onclick="activePatient.name='${p.name}'; alert('Consultation started with ${p.name}');">🩺 Consult</button></td>
+                        `;
+                        docTb.appendChild(tr);
+                    });
+                }
+
+                // Load Prescriptions for Dark Hub
+                const resRx = await fetch('/api/prescriptions');
+                const rxList = await resRx.json();
+                const hubTb = document.getElementById('hubPrescriptionsTable');
+                if (hubTb) {
+                    hubTb.innerHTML = '';
+                    rxList.forEach(rx => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong style="color:var(--primary); font-family:monospace;">${rx.rx_id}</strong><br><span>${rx.patient_name}</span></td>
+                            <td><span style="font-size:0.75rem;">${rx.medicines.join(', ')}</span><br><span style="font-size:0.7rem; color:var(--teal); font-weight:700;">${rx.destination_outlet}</span></td>
+                            <td><span class="badge-risk badge-high">${rx.status}</span></td>
+                        `;
+                        hubTb.appendChild(tr);
+                    });
+                }
+
+                // Load Lab Samples for Dark Hub
+                const resS = await fetch('/api/lab/samples');
+                const samples = await resS.json();
+                const labTb = document.getElementById('hubSamplesTable');
+                if (labTb) {
+                    labTb.innerHTML = '';
+                    samples.forEach(s => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong style="font-family:monospace; color:var(--teal);">${s.sample_id}</strong><br><span>${s.patient_name} (${s.village})</span></td>
+                            <td><span style="font-size:0.75rem;">${s.test_requested}</span><br><span style="font-size:0.7rem; color:var(--text-muted);">${s.storage}</span></td>
+                            <td><span class="badge-risk badge-normal">${s.result_status}</span></td>
+                        `;
+                        labTb.appendChild(tr);
+                    });
+                }
+            } catch (e) {
+                console.log('Error loading data:', e);
+            }
         }
 
         window.onload = function() {
-            // Check if user is logged in
+            loadData();
         };
     </script>
 </body>

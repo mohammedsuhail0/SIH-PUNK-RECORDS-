@@ -22,7 +22,7 @@
 
 ## 💡 2. The Core Solution: The Dual-Outlet Model
 
-ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply Logistics** through a **Dual-Outlet Architecture**:
+ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply Logistics** through a **Dual-Outlet Architecture** operated via 4 synchronized portals:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
@@ -31,22 +31,23 @@ ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply L
 │                                                                                        │
 │   📍 1. INSIDE THE VILLAGE             ☁️ 2. IN THE CLOUD / DISTRICT HOSPITAL          │
 │   ┌──────────────────────────────┐     ┌──────────────────────────────────────────┐    │
-│   │   Gram Care Point (Kiosk)    │     │   Doctor Tele-Consult Pool (Digital)     │    │
-│   │ • Patient meets ASHA helper  │────▶│ • MBBS & Specialist Doctors              │    │
+│   │   Village Clinic Intake      │     │   Doctor Tele-Consult Desk (Digital)     │    │
+│   │ • Aadhaar/FaceRD non-block   │────▶│ • MBBS & Specialist Doctors              │    │
 │   │ • Speaks symptoms in Marathi │     │ • Conducts 15kbps low-bandwidth consult  │    │
-│   │ • Records vitals (BP, SpO2)  │     │ • Issues instant digital e-Prescription  │    │
+│   │ • Checks vitals (BP, SpO2)   │     │ • Issues instant digital e-Prescription  │    │
+│   │ • Draws Blood & stores cold  │     │ • Orders Diagnostic Pathology Tests      │    │
 │   └──────────────┬───────────────┘     └────────────────────┬─────────────────────┘    │
 │                  │                                          │                          │
-│                  │ (Blood/Urine Sample)                     │ (Instant Digital Rx)     │
+│                  │ (Batch Blood Sample Pickup)              │ (Instant Digital Rx)     │
 │                  ▼                                          ▼                          │
-│   📍 3. ON THE CLUSTER OUTSKIRTS (Serving 3–5 Villages)                                │
+│   📍 3. ON THE CLUSTER OUTSKIRTS (Serving 3–5 Villages / 5 km Radius)                  │
 │   ┌───────────────────────────────────────────────────────────────────────────────┐    │
-│   │                 The Healthcare "Dark Store" & Diagnostic Hub                  │    │
+│   │                 Diagnostic & Supply Dark Hub (Outlet 2)                       │    │
 │   │                                                                               │    │
 │   │  💊 PHARMACY SECTION            🧪 DIAGNOSTIC LAB         🚑 EMERGENCY BASE   │    │
-│   │  • Cold-chain insulin, ASV      • Rapid blood & urine     • 108 Ambulance     │    │
-│   │  • Automated order packing      • Sputum & malaria kits   • Oxygen cylinders  │    │
-│   │  • 15–30 min delivery runner    • Digital lab reports     • < 15 min dispatch │    │
+│   │  • Cold-chain insulin, ASV      • Rapid CBC, Dengue, Hb   • 108 Ambulance     │    │
+│   │  • Pictorial Dosage Stickers    • Digital report to Cloud • Oxygen cylinders  │    │
+│   │  • 15–30 min delivery runner    • WhatsApp report dispatch• < 15 min dispatch │    │
 │   └──────────────────────────────────────┬────────────────────────────────────────┘    │
 │                                          │                                             │
 │                                          ▼ (15–30 Min Pre-Stickered Medicine Delivery) │
@@ -54,27 +55,35 @@ ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply L
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 🏢 The Three Operational Pillars:
-1. **Outlet 1: Gram Care Point (Inside Village):**
-   * Located at Gram Panchayat / Sub-Centre.
-   * Walk-in tablet kiosk operated by local ASHA volunteers.
-   * **100% Pictorial & Vernacular Voice AI (Marathi/Hindi/Gondi)** with zero typing.
-   * **1-on-1 Sahayak Guide:** Live human video/audio assistance button for elderly/anxious citizens.
-   * Basic vitals screening (BP, SpO2, Pulse, Temp, Blood Sugar).
-   * Patient gets checked and can head home to rest immediately.
+### 🏢 The 4 Operational Portals:
 
-2. **The Cloud Doctor Desk (Decentralized):**
-   * Medical Officers at Civil Hospitals / PHCs conduct tele-consultations over ultra-low bandwidth (15 kbps).
-   * Automated Clinical Risk Score (Normal, Moderate Risk, Emergency).
-   * Digital e-Prescriptions auto-routed directly to the nearest Outskirts Hub with dosage rules.
+1. **👩‍⚕️ Portal 1: Village Clinic Intake (Outlet 1 - ASHA / Walk-in):**
+   * Located at Gram Panchayat / Health Sub-Centre.
+   * Walk-in tablet kiosk operated by local ASHA volunteers or citizens themselves.
+   * **Aadhaar Auth & Health ID:** Sign in with 12-digit Aadhaar via OTP or biometric FaceRD camera scan. Automatically fetches existing ABHA Health Card details; non-cardholders are **never blocked** from receiving immediate medical care. We avoid wasting public funds on physical card printing—the software enables paperless care.
+   * **100% Pictorial & Vernacular Voice AI (Marathi `mr-IN` / Hindi):** Zero typing required for illiterate patients.
+   * **1-on-1 Sahayak Video Guide:** Live human video/audio assistance button for elder or anxious villagers.
+   * **IoT Vitals Screening:** Records BP, SpO2, Pulse, Temp, Blood Sugar, and Pain Level.
+   * **Clinic Blood Sample Draw:** Phlebotomy draw with barcode tagging and cold-box buffering (`/api/clinic/draw-sample`).
 
-3. **Outlet 2: Outskirts Diagnostic & Supply Dark Hub (Highway Junction):**
+2. **👨‍⚕️ Portal 2: Doctor Tele-Consult Desk (Medical Officer):**
+   * Medical Officers at Civil Hospitals / PHCs conduct tele-consultations over ultra-low bandwidth (15 kbps WebRTC).
+   * Automated Clinical Risk Score (Green: Mild, Yellow: Moderate, Red: Emergency).
+   * Digital e-Prescriptions with visual dosage instructions auto-routed directly to the nearest Outskirts Hub.
+   * Integrated Pathology test order routing.
+
+3. **📦 Portal 3: Diagnostic & Supply Dark Hub (Outlet 2 - Highway Junction):**
    * Strategic micro-fulfillment depot serving **a cluster of 3 to 5 villages (5–7 km radius)** — *"Blinkit for Healthcare"*.
-   * **Pre-Stickered Smart Packaging:** Pharmacist affixes high-contrast pictorial dosage stickers (☀️ Morning / 🌤️ Noon / 🌙 Night / 🍽️ After Food / 💊 Pill Dots) directly onto medicine packs for illiterate patient clarity.
+   * **Pre-Stickered Smart Packaging:** Pharmacist applies high-contrast pictorial dosage stickers (☀️ Morning Sun / 🌙 Night Moon / 🍽️ After Food / 💊 Pill Count Dots) directly onto heat-sealed medicine pouches.
    * **Solar-Powered Cold Chain (2°C–8°C):** Stocks critical emergency medicines (Insulin, Anti-Snake Venom, Oxytocin).
-   * **Rapid Diagnostic Point-of-Care Lab:** Processes CBC, malaria antigen, dengue, and urine samples.
-   * **108 Ambulance Staging Base:** Parked ambulances ready for immediate dispatch on **1-Touch SOS**.
-   * **15–30 Min Doorstep Home Delivery:** Local runners dispatch pre-stickered medicine packs straight to the patient's house and collect lab sample vials.
+   * **Rapid Diagnostic Point-of-Care Lab:** Processes batch blood and urine samples collected by runners (`/api/lab/submit-result`).
+   * Auto-dispatches diagnostic test reports to ABDM Cloud and citizen WhatsApp.
+
+4. **🛵 Portal 4: Runner Mobile Last-Mile Delivery & WhatsApp Bot:**
+   * Mobile-optimized delivery portal with live GPS route simulation.
+   * Collects batch blood sample vials from village clinics on return legs.
+   * Delivers sealed pre-stickered medicine pouches directly to patient doorsteps in 15–30 minutes.
+   * **Automated WhatsApp Bot:** Dispatches e-Rx PDFs, Marathi audio voice notes, test reports, and live runner tracking links directly to the patient's phone.
 
 ---
 
@@ -82,13 +91,14 @@ ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply L
 
 | Layer | Technologies | Role & Function in ArogyaMitr |
 | :--- | :--- | :--- |
-| **Frontend UI/UX** | React.js / Flutter PWA, Tailwind CSS, Lucide Icons | Responsive tablet interface in Medical Light Theme with large accessible cards. |
-| **Vernacular Voice AI** | Bhashini AI (MeitY) & Web Speech Synthesis API | Listens to speech in **Marathi/Hindi/Gondi** and reads instructions aloud. |
-| **Smart Packaging Engine** | Pictorial Dosage Sticker System | Standardized visual stickers (☀️ 🌙 🍽️) applied at the Dark Store for non-literate patients. |
+| **Frontend UI/UX** | Single-Page Application (SPA), HTML5, Tailwind CSS, Lucide Icons | Responsive tablet interface in Medical Light Theme with large accessible cards and role switcher. |
+| **Vernacular Voice AI** | Bhashini AI (MeitY) & Web Speech Synthesis API (`mr-IN`) | Listens to speech in **Marathi/Hindi** and speaks questions & instructions aloud. |
+| **Biometric Auth** | Aadhaar FaceRD Camera & OTP Simulator | Instant identity authentication and ABDM Health Card auto-linkage. |
+| **Smart Packaging Engine** | Pictorial Dosage Sticker System | Standardized visual stickers (☀️ 🌙 🍽️ 💊) applied at Dark Store for non-literate patients. |
 | **Offline-Native Storage** | Embedded SQLite, IndexedDB, WatermelonDB (CRDTs) | **0G Mode:** Records patient intakes with zero connectivity and auto-syncs when online. |
 | **Telehealth & SOS Engine** | LiveKit WebRTC (Opus Codec), WebSockets | 15 kbps ultra-low bandwidth tele-consults + real-time 1-Touch SOS GPS broadcasting. |
-| **Backend Core** | Python (FastAPI), Pydantic V2, Uvicorn | Clinical risk scoring algorithm, prescription dispatch routing, and session handling. |
-| **Database & Sensors** | PostgreSQL 16 + TimescaleDB | Relational patient data + time-series telemetry for cold-chain refrigerator temperature (`4.2°C`). |
+| **Backend Core** | Python 3.13 (FastAPI), Pydantic V2, Uvicorn | Clinical risk scoring algorithm, prescription dispatch routing, and session handling. |
+| **Cloud & Serverless** | Vercel Serverless Functions (`api/index.py`), ASGI Handler | High-availability global cloud deployment with zero server maintenance. |
 | **National Standards** | Ayushman Bharat (ABDM), HL7 FHIR R4 JSON Schemas | Links 14-digit ABHA IDs and exports interoperable clinical document bundles. |
 | **Data Privacy & Security** | AES-256 Encryption, TLS 1.3, STRIDE Hardening | Full compliance with India's **Digital Personal Data Protection (DPDP) Act 2023**. |
 
@@ -122,9 +132,9 @@ ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply L
 > *"Respected Judges, a digital PDF prescription cannot cure a patient in a tribal village with no pharmacy and no English literacy.
 > We present **ArogyaMitr** for Problem Statement **26133** by the **Government of Maharashtra**.
 > Our innovation combines a **Dual-Outlet Model** with a **Voice-First WebApp**:
-> 1. **Inside the Village (Gram Care Point):** A 100% pictorial, Marathi voice-guided kiosk where non-literate citizens check vitals, connect 1-on-1 with health guides, and consult doctors with zero typing.
+> 1. **Inside the Village (Village Clinic Intake):** A 100% pictorial, Marathi voice-guided kiosk where non-literate citizens authenticate via Aadhaar, check vitals, connect 1-on-1 with health guides, and consult doctors with zero typing.
 > 2. **On the Cluster Outskirts (Diagnostic & Supply Dark Hub):** A shared 'Blinkit for Healthcare' depot serving 3 to 5 villages that packs prescribed medicines with **pre-applied pictorial dosage stickers (☀️ Morning / 🌙 Night)** and delivers them **directly to the patient's home in 15 to 30 minutes**, while collecting diagnostic samples.
-> Built **100% offline-first** with Bhashini AI and ABDM FHIR R4 compliance, ArogyaMitr reduces rural healthcare travel by **70%** and saves **70%** in government CapEx.
+> Built **100% offline-first** with Bhashini AI, WhatsApp automation, and ABDM FHIR R4 compliance, ArogyaMitr reduces rural healthcare travel by **70%** and saves **70%** in government CapEx.
 > Because true healthcare isn't just about seeing a doctor on a screen — **it is about putting the medicine in the patient's hand at their doorstep.** Thank you!"*
 
 ---
@@ -133,7 +143,6 @@ ArogyaMitr bridges the gap between **Digital Tele-Care** and **Physical Supply L
 
 * **Project Root:** `C:\Users\Lenovo\.gemini\antigravity\scratch\mahahealth_connect\`
 * **Backend:** [`app.py`](file:///C:/Users/Lenovo/.gemini/antigravity/scratch/mahahealth_connect/app.py) (FastAPI Server on `http://127.0.0.1:8000`)
-* **Frontend:** [`dashboard.html`](file:///C:/Users/Lenovo/.gemini/antigravity/scratch/mahahealth_connect/dashboard.html) (Light Theme SPA with Multi-Role Auth)
-* **Presentation Deck:** `C:\Users\Lenovo\Downloads\ArogyaMitr_SIH2026_Idea_Presentation.pptx`
-* **Presentation PDF:** `C:\Users\Lenovo\Downloads\ArogyaMitr_SIH2026_Idea_Presentation.pdf`
-* **Technical Proposal PDF:** `C:\Users\Lenovo\Downloads\ArogyaMitr_SIH2026_PS26133_Solution_Proposal.pdf`
+* **Frontend:** [`dashboard.html`](file:///C:/Users/Lenovo/.gemini/antigravity/scratch/mahahealth_connect/dashboard.html) / [`index.html`](file:///C:/Users/Lenovo/.gemini/antigravity/scratch/mahahealth_connect/index.html)
+* **Vercel Cloud Deployment:** `https://mahahealthconnect.vercel.app`
+
