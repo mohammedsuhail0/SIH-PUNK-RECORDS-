@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArogyaMitr — SIH 2026 Interactive MVP (PS 26133)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --primary: #0284c7;
+            --primary-light: #e0f2fe;
+            --teal: #0d9488;
+            --teal-light: #ccfbf1;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --amber: #d97706;
+            --amber-light: #fef3c7;
+            --red: #dc2626;
+            --red-light: #fee2e2;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* AUTH SCREEN (FULLSCREEN OVERLAY) */
+        #authScreen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 10%, #e0f2fe 0%, #f8fafc 60%, #e2e8f0 100%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1.1fr 1.3fr;
+            overflow: hidden;
+        }
+
+        .auth-banner {
+            background: linear-gradient(145deg, #0284c7, #0d9488);
+            padding: 36px 30px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .auth-badge {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .auth-hero-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .auth-hero-desc {
+            font-size: 0.88rem;
+            opacity: 0.92;
+            line-height: 1.5;
+        }
+
+        .auth-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .auth-feat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .auth-feat-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .auth-form-side {
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1.5px solid var(--card-border);
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        .auth-tab {
+            padding: 8px 4px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2.5px solid transparent;
+            margin-bottom: -1.5px;
+            transition: all 0.2s;
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .role-card {
+            background: #f8fafc;
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .role-card:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        .role-avatar {
+            font-size: 1.5rem;
+        }
+
+        .role-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .role-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .auth-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .auth-input-group label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .auth-input {
+            background: #f8fafc;
+            border: 1.5px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .auth-input:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .btn-auth-submit {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-auth-submit:hover {
+            background: #0369a1;
+        }
+
+        /* MAIN APP LAYOUT */
+        aside {
+            width: 290px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            padding: 22px 18px;
+            gap: 18px;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.02);
+            z-index: 10;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+
+        .brand-title h2 { font-size: 1.2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.3px; }
+        .brand-title p { font-size: 0.72rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
+
+        .nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+
+        .nav-icon { font-size: 1.2rem; }
+
+        /* User Profile Pill in Sidebar */
+        .user-pill {
+            background: #f8fafc;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .user-avatar-badge {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .user-details h4 { font-size: 0.82rem; font-weight: 800; color: var(--text-main); }
+        .user-details p { font-size: 0.7rem; color: var(--text-muted); }
+
+        .btn-logout {
+            background: none;
+            border: none;
+            color: var(--red);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+
+        .btn-logout:hover { background: var(--red-light); }
+
+        .sync-card {
+            background: #f8fafc;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sync-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .dot-pulse {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
+        }
+
+        .btn-toggle-net {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+
+        .btn-toggle-net:hover { background: #f1f5f9; }
+
+        /* Main Body Area */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        header {
+            padding: 16px 32px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .head-info h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
+        .head-info p { font-size: 0.8rem; color: var(--text-muted); }
+
+        .head-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-select {
+            background: #ffffff;
+            color: var(--primary);
+            border: 1px solid var(--card-border);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+
+        .btn:hover { background: #f1f5f9; }
+        
+        .btn-primary { 
+            background: var(--primary); 
+            border-color: var(--primary); 
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+        }
+        .btn-primary:hover { background: #0369a1; }
+
+        .btn-sos {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: 1px solid #b91c1c;
+            color: #ffffff;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+            animation: pulse-sos 2s infinite;
+        }
+
+        @keyframes pulse-sos {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+        }
+
+        .content {
+            padding: 24px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Stat Grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
+        .stat-sub { font-size: 0.75rem; color: var(--green); font-weight: 600; }
+
+        /* Section Panels */
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+
+        /* Pictorial Symptom Grid */
+        .pictorial-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .symptom-card {
+            background: #ffffff;
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+
+        .symptom-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            background: #f0f9ff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .symptom-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .symptom-icon { font-size: 2.2rem; }
+        .symptom-title { font-size: 0.92rem; font-weight: 700; color: var(--text-main); }
+        .symptom-vernacular { font-size: 0.8rem; color: var(--primary); font-weight: 700; }
+        .audio-wave { font-size: 0.72rem; color: var(--teal); font-weight: 600; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 14px;
+            color: var(--text-muted);
+            border-bottom: 1.5px solid var(--card-border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: #f8fafc;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        tr:hover td { background: #f8fafc; }
+
+        .badge-risk {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-emergency { background: var(--red-light); color: var(--red); border: 1px solid #fca5a5; }
+        .badge-high { background: var(--amber-light); color: var(--amber); border: 1px solid #fcd34d; }
+        .badge-normal { background: var(--green-light); color: var(--green); border: 1px solid #86efac; }
+
+        /* Form Layout */
+        .vitals-form {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
+        .form-control {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            box-shadow: var(--shadow-sm);
+        }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15); }
+
+        /* JSON / FHIR Viewer */
+        .json-box {
+            background: #0f172a;
+            padding: 16px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            max-height: 320px;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            width: 600px;
+            max-width: 90%;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUTH SCREEN OVERLAY -->
+    <div id="authScreen">
+        <div class="auth-container">
+            <!-- Left Info Banner -->
+            <div class="auth-banner">
+                <div>
+                    <span class="auth-badge">SIH 2026 • PS 26133</span>
+                    <h2 class="auth-hero-title">ArogyaMitr Health Portal</h2>
+                    <p class="auth-hero-desc">Decentralized Rural Healthcare Infrastructure & Voice-Guided Tele-Care Network.</p>
+                    
+                    <div class="auth-features">
+                        <div class="auth-feat-item">
+                            <span class="auth-feat-icon">✓</span> Gram Care Point Voice Kiosk (Inside Village)
+                        </div>
+                        <div class="auth-feat-item">
+                            <span class="auth-feat-icon">✓</span> 15-Min Medicine Dark Hub (Cluster Outskirts)
+                        </div>
+                        <div class="auth-feat-item">
+                            <span class="auth-feat-icon">✓</span> 1-Touch 108 Emergency SOS & GPS Radar
+                        </div>
+                        <div class="auth-feat-item">
+                            <span class="auth-feat-icon">✓</span> Ayushman Bharat (ABDM) ABHA ID Linkage
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.72rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px;">
+                    🏛️ Government of Maharashtra • Maharashtra State Innovation Society
+                </div>
+            </div>
+
+            <!-- Right Login Form Side -->
+            <div class="auth-form-side">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="tabRoleLogin" onclick="switchAuthTab('role')">⚡ Fast Role Login (Demo)</div>
+                    <div class="auth-tab" id="tabAbhaLogin" onclick="switchAuthTab('abha')">🆔 ABHA / OTP Login</div>
+                </div>
+
+                <!-- Fast Role Selection (For Hackathon Demos) -->
+                <div id="roleLoginView">
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Select a user profile to enter the portal:</p>
+                    
+                    <div class="role-grid">
+                        <div class="role-card" onclick="loginAs('Savita Tai (ASHA)', 'Laheri Gram Care Point', 'ASHA Health Volunteer', '👩‍⚕️')">
+                            <div class="role-avatar">👩‍⚕️</div>
+                            <div>
+                                <div class="role-name">ASHA Volunteer</div>
+                                <div class="role-desc">Village Kiosk Intake</div>
+                            </div>
+                        </div>
+
+                        <div class="role-card" onclick="loginAs('Dr. Vivek Deshmukh', 'Aheri Cluster PHC', 'Medical Officer', '👨‍⚕️')">
+                            <div class="role-avatar">👨‍⚕️</div>
+                            <div>
+                                <div class="role-name">MBBS Doctor</div>
+                                <div class="role-desc">Tele-Consult & e-Rx</div>
+                            </div>
+                        </div>
+
+                        <div class="role-card" onclick="loginAs('Nitin Patil', 'Outskirts Dark Hub', 'Supply Chain Pharmacist', '📦')">
+                            <div class="role-avatar">📦</div>
+                            <div>
+                                <div class="role-name">Dark Store Hub</div>
+                                <div class="role-desc">15-Min Medicine Depot</div>
+                            </div>
+                        </div>
+
+                        <div class="role-card" onclick="loginAs('Dr. Sanjay Shinde', 'District Civil Hospital', 'District Health Officer', '🏛️')">
+                            <div class="role-avatar">🏛️</div>
+                            <div>
+                                <div class="role-name">DHO / Admin</div>
+                                <div class="role-desc">ABDM & Spatial Radar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABHA / Mobile OTP View -->
+                <div id="abhaLoginView" style="display: none; flex-direction: column; gap: 12px;">
+                    <div class="auth-input-group">
+                        <label>14-Digit ABHA Number or Registered Mobile</label>
+                        <input type="text" class="auth-input" id="authAbhaInput" placeholder="e.g. 91-4589-2041-3912 or 9876543210" value="91-4589-2041-3912">
+                    </div>
+
+                    <div class="auth-input-group">
+                        <label>6-Digit Secure OTP</label>
+                        <input type="password" class="auth-input" id="authOtpInput" placeholder="Enter OTP (Default: 123456)" value="123456">
+                    </div>
+
+                    <button class="btn-auth-submit" onclick="submitAbhaLogin()">Verify & Login to Dashboard ➔</button>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center;">⚡ Protected by ABDM Milestone 1, 2, 3 Security Standards</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside>
+        <div class="brand-box">
+            <div class="brand-logo">🏥</div>
+            <div class="brand-title">
+                <h2>ArogyaMitr</h2>
+                <p>SIH 2026 • PS 26133</p>
+            </div>
+        </div>
+
+        <nav class="nav-list">
+            <div class="nav-btn active" onclick="setTab('village')">
+                <span class="nav-icon">📍</span> Gram Care Point (Kiosk)
+            </div>
+            <div class="nav-btn" onclick="setTab('doctor')">
+                <span class="nav-icon">👨‍⚕️</span> Doctor Tele-Consult Desk
+            </div>
+            <div class="nav-btn" onclick="setTab('darkstore')">
+                <span class="nav-icon">📦</span> Outskirts Dark Hub
+            </div>
+            <div class="nav-btn" onclick="setTab('abdm')">
+                <span class="nav-icon">🆔</span> ABDM & FHIR R4 Bundle
+            </div>
+        </nav>
+
+        <div class="user-pill">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="user-avatar-badge" id="userAvatar">👩‍⚕️</div>
+                <div class="user-details">
+                    <h4 id="userName">Savita Tai (ASHA)</h4>
+                    <p id="userRole">Laheri Gram Care Point</p>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="logout()" title="Logout">Switch ⇄</button>
+        </div>
+
+        <div class="sync-card">
+            <div class="sync-head">
+                <span>0G / Offline Engine</span>
+                <span class="dot-pulse" id="netDot"></span>
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.3;" id="netStatusText">
+                🟢 Live Sync (SQLite Active)
+            </div>
+            <button class="btn-toggle-net" onclick="toggleNetwork()">
+                ⚡ Toggle 0G Mode
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <header>
+            <div class="head-info">
+                <h1 id="headerTitle">Gram Care Point: Vernacular Voice & Pictorial Kiosk</h1>
+                <p id="headerSubtitle">Laheri Sub-Centre, Bhamragad Block, Gadchiroli District (Tribal Zone)</p>
+            </div>
+            <div class="head-actions">
+                <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+                    <option value="mr">मराठी (Marathi)</option>
+                    <option value="hi">हिंदी (Hindi)</option>
+                    <option value="en">English</option>
+                </select>
+                <button class="btn" style="background: var(--teal-light); border-color: var(--teal); color: var(--teal);" onclick="openAgentCallModal()">
+                    🤝 1-on-1 Sahayak Guide
+                </button>
+                <button class="btn btn-sos" onclick="triggerSOSModal()">
+                    🚨 1-Touch SOS
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Stat Bar -->
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Daily Triages</div>
+                    <div class="stat-val" id="statTriages">28</div>
+                    <div class="stat-sub">↑ 9 via Voice Kiosk</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Dispatched Prescriptions</div>
+                    <div class="stat-val" id="statRx">19</div>
+                    <div class="stat-sub">⚡ 15–30 Min Hub Delivery</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Cold-Chain Temperature</div>
+                    <div class="stat-val" style="color: var(--primary);">4.2°C</div>
+                    <div class="stat-sub">☀️ Solar Backup 100%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Emergency Response Time</div>
+                    <div class="stat-val" style="color: var(--green);">11 Mins</div>
+                    <div class="stat-sub">108 Ambulance Tracked</div>
+                </div>
+            </div>
+
+            <!-- TAB 1: GRAM CARE POINT (VOICE & PICTORIAL KIOSK) -->
+            <div id="tab-village" class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>🗣️</span> Non-Literate Voice & Pictorial Symptom Selector
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">🔊 Tap any icon to hear audio prompt</span>
+                </div>
+
+                <!-- Pictorial Symptom Grid -->
+                <div class="pictorial-grid">
+                    <div class="symptom-card" onclick="selectSymptom('Chest Pain / Cardiac', 'छातीत दुखणे आणि धाप लागणे', this)">
+                        <div class="symptom-icon">🫀</div>
+                        <div class="symptom-title">Chest Pain</div>
+                        <div class="symptom-vernacular">छातीत दुखणे</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Pregnancy / Maternal', 'गर्भवती तपासणी आणि काळजी', this)">
+                        <div class="symptom-icon">🤰</div>
+                        <div class="symptom-title">Pregnancy Checkup</div>
+                        <div class="symptom-vernacular">गर्भवती काळजी</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Child Health & High Fever', 'लहान मुलांचा ताप आणि थंडी', this)">
+                        <div class="symptom-icon">👶</div>
+                        <div class="symptom-title">Child Health & Fever</div>
+                        <div class="symptom-vernacular">मुलांचा ताप</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Breathlessness / Respiratory', 'श्वास घेण्यास त्रास आणि खोकला', this)">
+                        <div class="symptom-icon">🫁</div>
+                        <div class="symptom-title">Breathing Issue</div>
+                        <div class="symptom-vernacular">श्वास घेण्यास त्रास</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Malaria & Chills', 'हिवताप आणि अंगदुखी', this)">
+                        <div class="symptom-icon">🦟</div>
+                        <div class="symptom-title">Malaria / Chills</div>
+                        <div class="symptom-vernacular">हिवताप व थंडी</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Blood Pressure & Sugar', 'रक्तदाब आणि साखर तपासणी', this)">
+                        <div class="symptom-icon">🩸</div>
+                        <div class="symptom-title">BP & Sugar Check</div>
+                        <div class="symptom-vernacular">रक्तदाब व साखर</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('Severe Snakebite / Injury', 'सर्पदंश किंवा गंभीर जखम', this)">
+                        <div class="symptom-icon">🐍</div>
+                        <div class="symptom-title">Snakebite / Trauma</div>
+                        <div class="symptom-vernacular">सर्पदंश / अपघात</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                    <div class="symptom-card" onclick="selectSymptom('General Checkup', 'सामान्य तपासणी आणि अशक्तपणा', this)">
+                        <div class="symptom-icon">💊</div>
+                        <div class="symptom-title">General Consultation</div>
+                        <div class="symptom-vernacular">सामान्य तपासणी</div>
+                        <div class="audio-wave">🔊 Play Audio</div>
+                    </div>
+                </div>
+
+                <!-- Assisted Vitals Form -->
+                <div class="panel-header" style="margin-top: 10px;">
+                    <div class="panel-title"><span>📋</span> Assisted Patient Vitals & Clinical Risk Calculation</div>
+                </div>
+                <div class="vitals-form">
+                    <div class="form-group">
+                        <label>Patient Full Name</label>
+                        <input type="text" id="v_name" class="form-control" value="Sunita Madavi">
+                    </div>
+                    <div class="form-group">
+                        <label>Age & Gender</label>
+                        <input type="text" id="v_age_gender" class="form-control" value="24 / Female">
+                    </div>
+                    <div class="form-group">
+                        <label>Village Name</label>
+                        <input type="text" id="v_village" class="form-control" value="Laheri (Gadchiroli)">
+                    </div>
+                    <div class="form-group">
+                        <label>Systolic / Diastolic BP (mmHg)</label>
+                        <input type="text" id="v_bp" class="form-control" value="160 / 100">
+                    </div>
+                    <div class="form-group">
+                        <label>Oxygen SpO2 (%)</label>
+                        <input type="number" id="v_spo2" class="form-control" value="94">
+                    </div>
+                    <div class="form-group">
+                        <label>Heart Pulse (bpm)</label>
+                        <input type="number" id="v_pulse" class="form-control" value="98">
+                    </div>
+                    <div class="form-group">
+                        <label>Body Temp (°F)</label>
+                        <input type="number" step="0.1" id="v_temp" class="form-control" value="99.2">
+                    </div>
+                    <div class="form-group">
+                        <label>Blood Glucose (mg/dL)</label>
+                        <input type="number" id="v_glucose" class="form-control" value="145">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                    <button class="btn btn-primary" onclick="submitTriage()">
+                        ✅ Record Triage & Calculate Risk Score
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: DOCTOR TELE-CONSULT DESK -->
+            <div id="tab-doctor" class="panel" style="display: none;">
+                <div class="panel-header">
+                    <div class="panel-title"><span>👨‍⚕️</span> Village Tele-Consultation Queue & e-Prescription Dispatch</div>
+                    <span class="badge-risk badge-normal">Low-Bandwidth 15kbps WebRTC Active</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient ID / ABHA</th>
+                            <th>Name & Village</th>
+                            <th>Clinical Risk Priority</th>
+                            <th>Vitals Summary</th>
+                            <th>Condition / Complaint</th>
+                            <th>Tele-Consult Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctorTableBody">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TAB 3: OUTSKIRTS DIAGNOSTIC & SUPPLY DARK HUB -->
+            <div id="tab-darkstore" class="panel" style="display: none;">
+                <div class="panel-header">
+                    <div class="panel-title"><span>📦</span> Outskirts Diagnostic & Supply Dark Hub — Pre-Stickered Dosage & Home Delivery</div>
+                    <button class="btn btn-primary" style="font-size: 0.78rem;" onclick="triggerDispatchDemo()">⚡ Fast Dispatch Runner</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+                    <div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px; color: var(--primary);">📡 Auto-Received Prescriptions (Pre-Stickered & Home Dispatched)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rx ID</th>
+                                    <th>Patient</th>
+                                    <th>Prescribed Items</th>
+                                    <th>Status / ETA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prescriptionTableBody">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px; color: var(--teal);">🧪 Cold-Chain Pharmacy & Diagnostic Stock</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Medicine / Test</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
+                                    <th>Cold Storage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: ABDM & FHIR R4 INSPECTOR -->
+            <div id="tab-abdm" class="panel" style="display: none;">
+                <div class="panel-header">
+                    <div class="panel-title"><span>🆔</span> Ayushman Bharat Digital Mission (ABDM) — HL7 FHIR R4 Inspector</div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                    Real-time interoperable FHIR R4 Document Bundle linking the patient's ABHA ID, clinical observations, and digital prescriptions:
+                </p>
+                <div class="json-box" id="fhirContent">
+                    // Select any patient from the triage desk to inspect their ABDM FHIR JSON bundle
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 1-Touch Emergency SOS Modal -->
+    <div class="modal-overlay" id="sosModal">
+        <div class="modal-box" style="border-color: #fca5a5; text-align: center;">
+            <div style="font-size: 3rem;">🚨</div>
+            <h2 style="color: var(--red); font-size: 1.4rem;">CRITICAL 108 EMERGENCY SOS BROADCASTED</h2>
+            <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.5;">
+                GPS Coordinates: <strong>19.6542° N, 80.3541° E (Bhamragad Hamlet 4)</strong><br>
+                Nearest Outskirts Hub alerted. 108 Emergency Ambulance dispatched with oxygen & antivenom.
+            </p>
+            <div style="background: var(--red-light); border: 1px solid #fca5a5; border-radius: 10px; padding: 14px;">
+                <div style="font-size: 0.8rem; color: #991b1b; font-weight: 700;">ASSIGNED VEHICLE:</div>
+                <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">MH-33-G-4412 (Aheri Base)</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--green); margin-top: 4px;">ETA: 11 MINS</div>
+            </div>
+            <button class="btn" style="background: #f1f5f9; justify-content: center;" onclick="closeModal('sosModal')">Dismiss Alarm</button>
+        </div>
+    </div>
+
+    <!-- 1-on-1 Sahayak Guide Call Modal -->
+    <div class="modal-overlay" id="agentModal">
+        <div class="modal-box" style="border-color: #99f6e4;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="color: var(--teal); font-size: 1.15rem;">🤝 1-on-1 Live Health Sahayak Guide</h3>
+                <button onclick="closeModal('agentModal')" style="background:none; border:none; color:var(--text-muted); font-size:1.3rem; cursor:pointer;">&times;</button>
+            </div>
+            <div style="background: #f8fafc; height: 190px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1.5px solid var(--card-border);">
+                <div style="font-size: 2.6rem; margin-bottom: 4px;">👩‍⚕️</div>
+                <div style="font-weight: 800; color: var(--text-main);">Smt. Savita Tai (Community Health Officer)</div>
+                <div style="font-size: 0.75rem; color: var(--green); font-weight: 700;">● Live WebRTC Audio/Video (15 kbps Ultra-Low Bandwidth)</div>
+                <div style="position: absolute; bottom: 10px; right: 10px; background: #ffffff; border: 1px solid var(--card-border); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--primary); font-weight: 700;">Language: Marathi</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+                <em>"नमस्कार, मी आरोग्यमित्र सहायिका सविता. तुम्हाला किंवा कुटुंबियांना काय त्रास होत आहे? मी तुम्हाला डॉक्टरांशी बोलण्यासाठी आणि औषधे मागवण्यासाठी मदत करते."</em>
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn" onclick="closeModal('agentModal')">End Assistance</button>
+                <button class="btn btn-primary" onclick="alert('Doctor connected via 1-on-1 Sahayak bridge!'); closeModal('agentModal');">Connect to MBBS Doctor ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isOnline = true;
+        let selectedSymptomText = "General Checkup";
+        let patients = [];
+        let prescriptions = [];
+        let inventory = [];
+
+        // Auth Logic
+        function switchAuthTab(tab) {
+            document.getElementById('tabRoleLogin').classList.toggle('active', tab === 'role');
+            document.getElementById('tabAbhaLogin').classList.toggle('active', tab === 'abha');
+            document.getElementById('roleLoginView').style.display = tab === 'role' ? 'block' : 'none';
+            document.getElementById('abhaLoginView').style.display = tab === 'abha' ? 'flex' : 'none';
+        }
+
+        function loginAs(name, location, role, avatar) {
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userRole').textContent = location;
+            document.getElementById('userAvatar').textContent = avatar;
+            
+            // Auto switch tab based on role
+            if (role.includes('Doctor')) {
+                setTab('doctor');
+            } else if (role.includes('Pharmacist') || role.includes('Dark Store')) {
+                setTab('darkstore');
+            } else if (role.includes('DHO') || role.includes('Admin')) {
+                setTab('abdm');
+            } else {
+                setTab('village');
+            }
+
+            document.getElementById('authScreen').style.display = 'none';
+            loadData();
+        }
+
+        function submitAbhaLogin() {
+            const abha = document.getElementById('authAbhaInput').value;
+            loginAs(`User (${abha.slice(-4)})`, 'Verified via ABDM OTP', 'Verified Patient / Worker', '👤');
+        }
+
+        function logout() {
+            document.getElementById('authScreen').style.display = 'flex';
+        }
+
+        function setTab(tabName) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            ['village', 'doctor', 'darkstore', 'abdm'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                if (el) el.style.display = t === tabName ? 'block' : 'none';
+            });
+            
+            const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.textContent.toLowerCase().includes(tabName === 'village' ? 'gram' : tabName === 'doctor' ? 'doctor' : tabName === 'darkstore' ? 'dark' : 'abdm'));
+            if (activeBtn) activeBtn.classList.add('active');
+
+            const headers = {
+                village: ['Gram Care Point: Vernacular Voice & Pictorial Kiosk', 'Laheri Sub-Centre, Bhamragad Block, Gadchiroli District (Tribal Zone)'],
+                doctor: ['Doctor Tele-Consultation Desk & Digital e-Prescription', 'Aheri Cluster Medical Officer Tele-Health Console'],
+                darkstore: ['Outskirts Cluster Diagnostic & Supply Dark Hub', 'Micro-Fulfillment Depot & Rapid Lab Testing (Serving 3–5 Villages)'],
+                abdm: ['Ayushman Bharat Digital Mission (ABDM) Standards Inspector', 'HL7 FHIR R4 Interoperability & ABHA ID Health Record Verification']
+            };
+            document.getElementById('headerTitle').textContent = headers[tabName][0];
+            document.getElementById('headerSubtitle').textContent = headers[tabName][1];
+        }
+
+        function toggleNetwork() {
+            isOnline = !isOnline;
+            const dot = document.getElementById('netDot');
+            const txt = document.getElementById('netStatusText');
+            if (isOnline) {
+                dot.style.background = '#16a34a';
+                dot.style.boxShadow = '0 0 8px rgba(22, 163, 74, 0.6)';
+                txt.innerHTML = '🟢 Live Sync (SQLite Active)';
+                alert('⚡ Network Reconnected: Local offline cache synced with Cloud PostgreSQL!');
+            } else {
+                dot.style.background = '#dc2626';
+                dot.style.boxShadow = '0 0 8px rgba(220, 38, 38, 0.6)';
+                txt.innerHTML = '🔴 0G Mode (IndexedDB Queue)';
+                alert('📡 Offline Mode Activated: Patient records & voice intakes are now stored securely in local SQLite!');
+            }
+        }
+
+        function selectSymptom(name, vernacular, cardEl) {
+            document.querySelectorAll('.symptom-card').forEach(c => c.classList.remove('selected'));
+            cardEl.classList.add('selected');
+            selectedSymptomText = name;
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(vernacular);
+                utter.lang = 'mr-IN';
+                utter.rate = 0.9;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+
+        function changeLanguage() {
+            const l = document.getElementById('langSelect').value;
+            if (l === 'mr') alert('भाषा मराठीत निवडली गेली आहे. (Language set to Marathi)');
+            else if (l === 'hi') alert('भाषा हिंदी में सेट की गई है। (Language set to Hindi)');
+        }
+
+        async function loadData() {
+            try {
+                const resP = await fetch('/api/patients');
+                patients = await resP.json();
+                renderPatients();
+
+                const resRx = await fetch('/api/prescriptions');
+                prescriptions = await resRx.json();
+                renderPrescriptions();
+
+                const resI = await fetch('/api/inventory');
+                const invData = await resI.json();
+                inventory = invData.items || [];
+                renderInventory();
+
+                if (patients.length > 0) inspectFhir(patients[0].id);
+            } catch (e) {
+                console.log('Error loading data:', e);
+            }
+        }
+
+        function renderPatients() {
+            const tb = document.getElementById('doctorTableBody');
+            tb.innerHTML = '';
+            document.getElementById('statTriages').textContent = patients.length;
+
+            patients.forEach(p => {
+                let badgeClass = 'badge-normal';
+                if (p.risk_level === 'Emergency') badgeClass = 'badge-emergency';
+                else if (p.risk_level === 'High Risk') badgeClass = 'badge-high';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <strong>${p.id}</strong><br>
+                        <span style="font-family:monospace; font-size:0.75rem; color:var(--primary);">${p.abha_id}</span>
+                    </td>
+                    <td><strong>${p.name}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${p.village} (${p.age}y / ${p.gender})</span></td>
+                    <td><span class="badge-risk ${badgeClass}">${p.risk_level}</span></td>
+                    <td style="font-family:monospace; font-size:0.78rem;">
+                        BP: ${p.vitals.bp}<br>SpO2: ${p.vitals.spo2} • Temp: ${p.vitals.temp}
+                    </td>
+                    <td style="font-size:0.82rem; max-width:200px;">${p.condition}</td>
+                    <td>
+                        <button class="btn btn-primary" style="padding:4px 8px; font-size:0.75rem;" onclick="issueRxDemo('${p.id}', '${p.name}')">
+                            🩺 Consult & Issue Rx
+                        </button>
+                    </td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        function renderPrescriptions() {
+            const tb = document.getElementById('prescriptionTableBody');
+            tb.innerHTML = '';
+            document.getElementById('statRx').textContent = prescriptions.length;
+
+            prescriptions.forEach(rx => {
+                const stickersHtml = (rx.dosage_stickers || ['☀️ Morning (1 Tab)', '🌙 Night (1 Tab)'])
+                    .map(s => `<span style="display:inline-block; background:#fef3c7; color:#92400e; border:1px solid #fde68a; border-radius:4px; padding:2px 6px; font-size:0.68rem; font-weight:700; margin-right:4px; margin-top:3px;">🏷️ ${s}</span>`)
+                    .join('');
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-family:monospace; color:var(--primary);"><strong>${rx.rx_id}</strong></td>
+                    <td>
+                        <strong>${rx.patient_name}</strong><br>
+                        <span style="font-size:0.72rem; color:var(--teal); font-weight:700;">${rx.destination_outlet}</span>
+                    </td>
+                    <td style="font-size:0.78rem;">
+                        <div>${rx.medicines.join(', ')}</div>
+                        <div style="margin-top:4px;">${stickersHtml}</div>
+                    </td>
+                    <td><span class="badge-risk badge-high">${rx.status}</span></td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        function renderInventory() {
+            const tb = document.getElementById('inventoryTableBody');
+            tb.innerHTML = '';
+            inventory.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${item.name}</strong></td>
+                    <td style="font-size:0.75rem;">${item.category}</td>
+                    <td><strong>${item.stock}</strong> ${item.unit}</td>
+                    <td><span style="font-size:0.75rem; color:var(--primary); font-family:monospace; font-weight:700;">${item.cold_chain}</span></td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        async function submitTriage() {
+            const bpParts = document.getElementById('v_bp').value.split('/');
+            const payload = {
+                name: document.getElementById('v_name').value || 'Village Patient',
+                age: 24,
+                gender: "Female",
+                village: document.getElementById('v_village').value || 'Laheri',
+                systolic_bp: parseInt(bpParts[0]) || 120,
+                diastolic_bp: parseInt(bpParts[1]) || 80,
+                spo2: parseInt(document.getElementById('v_spo2').value) || 97,
+                pulse: parseInt(document.getElementById('v_pulse').value) || 88,
+                temp: parseFloat(document.getElementById('v_temp').value) || 98.6,
+                blood_glucose: parseInt(document.getElementById('v_glucose').value) || 110,
+                symptoms: [selectedSymptomText]
+            };
+
+            const res = await fetch('/api/triage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            alert(`✅ Triage recorded for ${payload.name}!\nRisk Score: ${data.risk_assessment.level}\nFlags: ${data.risk_assessment.flags.join(', ') || 'None'}`);
+            loadData();
+        }
+
+        async function issueRxDemo(pId, pName) {
+            const payload = {
+                patient_id: pId,
+                patient_name: pName,
+                doctor_name: "Dr. Vivek Deshmukh (Medical Officer)",
+                medicines: ["Amoxicillin 500mg (10 Tabs)", "Paracetamol 650mg", "Oral Rehydration Salts (ORS)"],
+                diagnostic_tests: ["Complete Blood Count (CBC)"],
+                target_hub: "Outskirts Diagnostic & Supply Dark Hub",
+                destination_outlet: `🏠 Patient Doorstep Delivery (${pName}'s Home)`,
+                dosage_stickers: ["☀️ Morning (1 Tab After Food)", "🌙 Night (1 Tab After Food)"]
+            };
+
+            await fetch('/api/prescriptions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            alert(`🚀 e-Prescription auto-routed to Outskirts Dark Store for ${pName}!\nMedicines are packed with pre-applied pictorial dosage stickers and dispatched directly to patient doorstep!`);
+            loadData();
+        }
+
+        async function inspectFhir(patientId) {
+            try {
+                const res = await fetch(`/api/fhir/${patientId}`);
+                const data = await res.json();
+                document.getElementById('fhirContent').textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function triggerSOSModal() {
+            document.getElementById('sosModal').style.display = 'flex';
+        }
+
+        function openAgentCallModal() {
+            document.getElementById('agentModal').style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function triggerDispatchDemo() {
+            alert('🛵 Runner dispatched from Outskirts Hub with pre-stickered medicine pouches!\nEstimated Arrival at Patient Doorstep: 14 Mins.');
+        }
+
+        window.onload = function() {
+            // Check if user is logged in
+        };
+    </script>
+</body>
+</html>
