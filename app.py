@@ -234,8 +234,18 @@ DB = {
 
 class AadhaarAuthInput(BaseModel):
     aadhaar_number: str
-    auth_method: str = "otp"  # "otp" or "face"
-    otp_code: Optional[str] = "123456"
+    auth_method: str = "otp"  # "otp" or "face_rd"
+
+class CitizenRegisterInput(BaseModel):
+    aadhaar_number: str
+    name: str
+    age: int
+    gender: str
+    village: str
+    district: str = "Gadchiroli"
+    phone: str = "+91 98000 00000"
+    existing_abha_id: Optional[str] = None
+    existing_conditions: List[str] = []
 
 class TriageInput(BaseModel):
     name: str
@@ -347,6 +357,80 @@ def authenticate_aadhaar(data: AadhaarAuthInput):
             "abha_id": None,
             "message": f"Aadhaar verified via {data.auth_method.upper()}. Immediate healthcare access enabled."
         }
+
+@app.post("/api/auth/register")
+def register_citizen(data: CitizenRegisterInput):
+    clean_num = data.aadhaar_number.replace("-", "").replace(" ", "")
+    formatted = f"{clean_num[:4]}-{clean_num[4:8]}-{clean_num[8:12]}" if len(clean_num) == 12 else data.aadhaar_number
+    
+    has_card = bool(data.existing_abha_id and len(data.existing_abha_id.strip()) > 5)
+    
+    new_citizen = {
+        "aadhaar": formatted,
+        "name": data.name,
+        "age": data.age,
+        "gender": data.gender,
+        "village": data.village,
+        "district": data.district,
+        "phone": data.phone,
+        "has_health_card": has_card,
+        "abha_id": data.existing_abha_id.strip() if has_card else f"91-{clean_num[:4]}-{clean_num[4:8]}-8899" if len(clean_num) == 12 else None,
+        "photo_avatar": "👤",
+        "existing_conditions": data.existing_conditions
+    }
+    AADHAAR_REGISTRY[clean_num] = new_citizen
+    
+    # Also create patient profile in active db
+    p_id = f"P-{len(DB['patients']) + 101}"
+    patient_record = {
+        "id": p_id,
+        "aadhaar": formatted,
+        "abha_id": new_citizen["abha_id"],
+        "has_card": has_card,
+        "name": data.name,
+        "age": data.age,
+        "gender": data.gender,
+        "village": data.village,
+        "district": data.district,
+        "phone": data.phone,
+        "symptoms": ["Initial Registration Profile Created"],
+        "condition": "New Citizen Profile Active",
+        "risk_level": "Normal",
+        "vitals": {"bp": "120/80", "spo2": "98%", "pulse": 76, "temp": "98.4°F", "glucose": "100 mg/dL", "hb": "12.5 g/dL"},
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "status": "Registered • Ready for Tele-Consultation",
+        "blood_sample_drawn": False,
+        "sample_id": None
+    }
+    DB["patients"].insert(0, patient_record)
+
+    return {
+        "status": "registered",
+        "citizen": new_citizen,
+        "patient_id": p_id,
+        "message": f"Welcome {data.name}! Your citizen profile is successfully registered."
+    }
+
+@app.get("/api/patient/{patient_id}/summary")
+def get_patient_summary(patient_id: str):
+    patient = next((p for p in DB["patients"] if p["id"] == patient_id or p["aadhaar"].replace("-","") == patient_id.replace("-","") or p["name"].lower() == patient_id.lower()), None)
+    if not patient and DB["patients"]:
+        patient = DB["patients"][0]
+    
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient profile not found")
+        
+    p_prescriptions = [rx for rx in DB["prescriptions"] if rx["patient_id"] == patient["id"] or rx["patient_name"].lower() == patient["name"].lower()]
+    p_samples = [s for s in DB["clinic_samples"] if s["patient_id"] == patient["id"] or s["patient_name"].lower() == patient["name"].lower()]
+    p_whatsapp = [w for w in DB["whatsapp_messages"] if w["patient_id"] == patient["id"] or w["patient_name"].lower() == patient["name"].lower()]
+
+    return {
+        "patient": patient,
+        "prescriptions": p_prescriptions,
+        "lab_samples": p_samples,
+        "whatsapp_messages": p_whatsapp,
+        "active_delivery": p_prescriptions[0] if p_prescriptions else None
+    }
 
 @app.get("/api/stats")
 def get_stats():
