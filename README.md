@@ -130,11 +130,12 @@ python -m uvicorn app:app --host 127.0.0.1 --port 8000 --reload
 
 ---
 
-## 🌐 6. Vercel Deployment
+## 🌐 6. Live Vercel Deployment
 
-This repository is pre-configured for 1-click deployment on **Vercel**:
+The application is deployed and live in production on Vercel:
+* 🔗 **Live Production URL:** [https://mahahealthconnect.vercel.app](https://mahahealthconnect.vercel.app)
+* 🔗 **Alternative Mirror URL:** [https://mahahealthconnect-emydfto9l-mohammedsuhail0s-projects.vercel.app](https://mahahealthconnect-emydfto9l-mohammedsuhail0s-projects.vercel.app)
 * `vercel.json` provides routing for static SPA frontend + serverless FastAPI backend (`api/index.py`).
-* Live Vercel Link: **Deploy directly from this GitHub repository to Vercel in 30 seconds!**
 
 ---
 
