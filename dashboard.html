@@ -26,21 +26,23 @@
             --amber-light: #fef3c7;
             --rose: #e11d48;
             --rose-light: #ffe4e6;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
-            --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-            --shadow-float: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --shadow-subtle: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 3px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+            --shadow-float: 0 15px 20px -5px rgba(15, 23, 42, 0.08);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            height: 100%;
+        }
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
@@ -49,8 +51,8 @@
         /* SVG Icons Utility */
         .icon {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             stroke-width: 2;
             stroke: currentColor;
             fill: none;
@@ -58,15 +60,15 @@
             stroke-linejoin: round;
             vertical-align: middle;
         }
-        .icon-sm { width: 16px; height: 16px; }
-        .icon-lg { width: 24px; height: 24px; }
-        .icon-xl { width: 32px; height: 32px; }
+        .icon-sm { width: 14px; height: 14px; }
+        .icon-lg { width: 22px; height: 22px; }
+        .icon-xl { width: 28px; height: 28px; }
 
         /* HEADER */
         header {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
-            padding: 12px 28px;
+            padding: 8px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -74,37 +76,38 @@
             top: 0;
             z-index: 50;
             box-shadow: var(--shadow-subtle);
+            height: 52px;
         }
 
         .header-brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             cursor: pointer;
         }
 
         .brand-emblem {
-            width: 42px;
-            height: 42px;
+            width: 34px;
+            height: 34px;
             background: linear-gradient(135deg, var(--primary), var(--teal));
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
         }
 
         .brand-info h1 {
-            font-size: 1.18rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--text-primary);
             letter-spacing: -0.3px;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .brand-info p {
-            font-size: 0.73rem;
+            font-size: 0.68rem;
             color: var(--teal);
             font-weight: 700;
             letter-spacing: 0.2px;
@@ -113,24 +116,24 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .auth-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--surface-muted);
             border: 1px solid var(--border);
-            padding: 6px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.82rem;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
             font-weight: 600;
         }
 
         .auth-badge .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: var(--emerald);
             border-radius: 50%;
             box-shadow: 0 0 0 2px var(--emerald-light);
@@ -140,13 +143,13 @@
             background: var(--rose-light);
             color: var(--rose);
             border: 1px solid rgba(225, 29, 72, 0.25);
-            padding: 7px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.82rem;
+            padding: 5px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
             transition: all 0.15s ease;
         }
@@ -159,13 +162,13 @@
             background: #ffffff;
             border: 1px solid var(--border);
             color: var(--text-secondary);
-            padding: 7px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.82rem;
+            padding: 5px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
             transition: all 0.15s ease;
         }
@@ -179,103 +182,119 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .view-section {
             display: none;
-            animation: fadeIn 0.25s ease forwards;
+            animation: fadeIn 0.2s ease forwards;
         }
         .view-section.active {
             display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ==================== GATEWAY / LANDING SCREEN ==================== */
+        /* ==================== GATEWAY / LANDING SCREEN (COMPACT PPT FIT) ==================== */
         .gateway-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 24px;
+            max-width: 1260px;
+            margin: 10px auto;
+            padding: 0 16px;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .gateway-hero {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 14px;
         }
 
         .gov-tag {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--primary-light);
             color: var(--primary-dark);
-            padding: 6px 14px;
+            padding: 3px 10px;
             border-radius: 999px;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 6px;
             border: 1px solid rgba(2, 132, 199, 0.2);
         }
 
         .gateway-hero h2 {
-            font-size: 2.3rem;
+            font-size: 1.55rem;
             font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.6px;
-            margin-bottom: 12px;
-            line-height: 1.2;
+            letter-spacing: -0.4px;
+            margin-bottom: 4px;
+            line-height: 1.15;
         }
 
         .gateway-hero p {
-            font-size: 1.05rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            max-width: 680px;
+            max-width: 760px;
             margin: 0 auto;
-            line-height: 1.5;
+            line-height: 1.35;
         }
 
+        /* 5-COLUMN ROLE GRID IN ONE COMPACT ROW */
         .role-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .role-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .role-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
+            border-radius: var(--radius-md);
+            padding: 14px 12px;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-shadow: var(--shadow-subtle);
+            min-height: 220px;
         }
 
         .role-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             border-color: var(--primary);
             box-shadow: var(--shadow-card);
         }
 
         .role-card-top {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
         }
 
         .role-icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-md);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -291,12 +310,12 @@
         .role-card.runner-role .role-icon-box { background: var(--amber-light); color: var(--amber); }
 
         .role-tag {
-            font-size: 0.72rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 2px 7px;
+            border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
         }
         .tag-citizen { background: var(--primary-light); color: var(--primary-dark); }
         .tag-clinic { background: var(--teal-light); color: var(--teal); }
@@ -305,38 +324,39 @@
         .tag-runner { background: var(--amber-light); color: var(--amber); }
 
         .role-title {
-            font-size: 1.15rem;
+            font-size: 0.96rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 2px;
+            line-height: 1.2;
         }
 
         .role-marathi {
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             font-weight: 500;
         }
 
         .role-desc {
-            font-size: 0.86rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            line-height: 1.45;
-            margin-bottom: 20px;
+            line-height: 1.35;
+            margin-bottom: 12px;
         }
 
         .role-action-btn {
             background: var(--surface-muted);
             color: var(--text-primary);
             border: 1px solid var(--border);
-            padding: 10px;
+            padding: 6px 10px;
             border-radius: var(--radius-sm);
-            font-size: 0.84rem;
+            font-size: 0.76rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.15s ease;
         }
 
@@ -346,15 +366,15 @@
             border-color: var(--primary);
         }
 
-        /* STATS BAR */
+        /* STATS BAR COMPACT */
         .gateway-metrics {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 20px 32px;
+            border-radius: var(--radius-md);
+            padding: 10px 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
             box-shadow: var(--shadow-subtle);
         }
 
@@ -363,17 +383,18 @@
         }
 
         .metric-val {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: var(--primary);
             font-family: 'JetBrains Mono', monospace;
+            line-height: 1.1;
         }
 
         .metric-lbl {
-            font-size: 0.78rem;
+            font-size: 0.68rem;
             color: var(--text-muted);
             font-weight: 600;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* ==================== AUTH MODAL ==================== */
@@ -389,7 +410,7 @@
             align-items: center;
             justify-content: center;
             z-index: 100;
-            padding: 20px;
+            padding: 16px;
         }
 
         .modal-overlay.active {
@@ -399,28 +420,22 @@
         .modal-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            max-width: 480px;
+            border-radius: var(--radius-lg);
+            max-width: 440px;
             width: 100%;
-            padding: 28px;
+            padding: 24px;
             box-shadow: var(--shadow-float);
-            animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-        }
-
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.96) translateY(8px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             background: var(--surface-muted);
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -430,34 +445,34 @@
         }
 
         .modal-header {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .modal-header h3 {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .modal-header p {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             color: var(--text-secondary);
         }
 
         .auth-tabs {
             display: flex;
             background: var(--surface-muted);
-            padding: 4px;
-            border-radius: var(--radius-md);
-            margin-bottom: 20px;
+            padding: 3px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
             border: 1px solid var(--border);
         }
 
         .auth-tab {
             flex: 1;
-            padding: 8px 12px;
-            font-size: 0.82rem;
+            padding: 6px 10px;
+            font-size: 0.78rem;
             font-weight: 700;
             border: none;
             background: transparent;
@@ -470,37 +485,36 @@
         .auth-tab.active {
             background: var(--surface);
             color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .form-label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .form-input, .form-select {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            font-size: 0.9rem;
+            font-size: 0.84rem;
             font-family: inherit;
             color: var(--text-primary);
             background: #ffffff;
-            transition: border-color 0.15s ease;
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-light);
+            box-shadow: 0 0 0 2px var(--primary-light);
         }
 
         .btn-primary {
@@ -508,15 +522,15 @@
             background: var(--primary);
             color: #ffffff;
             border: none;
-            padding: 12px;
-            border-radius: var(--radius-md);
-            font-size: 0.92rem;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.84rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: background 0.15s ease;
         }
 
@@ -525,34 +539,34 @@
         }
 
         .demo-quick-section {
-            margin-top: 20px;
-            padding-top: 16px;
+            margin-top: 14px;
+            padding-top: 12px;
             border-top: 1px solid var(--border);
         }
 
         .demo-quick-title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .demo-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
         }
 
         .demo-chip {
             background: var(--surface-muted);
             border: 1px solid var(--border);
-            padding: 6px 12px;
+            padding: 4px 10px;
             border-radius: 999px;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 600;
             color: var(--text-secondary);
             cursor: pointer;
@@ -566,45 +580,45 @@
 
         /* ==================== PORTAL 1: CITIZEN SMARTPHONE APP ==================== */
         .citizen-app-wrap {
-            max-width: 900px;
-            margin: 24px auto 48px;
-            padding: 0 20px;
+            max-width: 840px;
+            margin: 16px auto 32px;
+            padding: 0 16px;
             width: 100%;
         }
 
         .citizen-profile-card {
             background: linear-gradient(135deg, #0284c7, #0d9488);
             color: #ffffff;
-            border-radius: var(--radius-xl);
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 16px rgba(2, 132, 199, 0.18);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
 
         .profile-main-info h2 {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .profile-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
 
         .badge-pill-light {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(4px);
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 999px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -615,28 +629,28 @@
             display: flex;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 4px;
-            margin-bottom: 24px;
-            gap: 4px;
+            border-radius: var(--radius-sm);
+            padding: 3px;
+            margin-bottom: 16px;
+            gap: 3px;
             overflow-x: auto;
         }
 
         .citizen-tab-btn {
             flex: 1;
-            min-width: 140px;
-            padding: 10px 14px;
+            min-width: 120px;
+            padding: 8px 10px;
             border: none;
             background: transparent;
             border-radius: var(--radius-sm);
-            font-size: 0.84rem;
+            font-size: 0.78rem;
             font-weight: 700;
             color: var(--text-secondary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.15s ease;
         }
 
@@ -651,59 +665,56 @@
         }
         .tab-panel.active {
             display: block;
-            animation: fadeIn 0.2s ease forwards;
         }
 
-        /* CLINICAL SYMPTOMS SELECTOR */
         .clinical-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
+            border-radius: var(--radius-md);
+            padding: 18px;
             box-shadow: var(--shadow-subtle);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         .card-heading {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         .card-heading h3 {
-            font-size: 1.1rem;
+            font-size: 0.98rem;
             font-weight: 800;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .voice-mic-box {
             background: var(--surface-muted);
             border: 1px dashed var(--border);
-            border-radius: var(--radius-md);
-            padding: 16px;
+            border-radius: var(--radius-sm);
+            padding: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .btn-voice {
             background: var(--primary);
             color: #ffffff;
             border: none;
-            padding: 10px 18px;
-            border-radius: var(--radius-md);
-            font-size: 0.86rem;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
-            transition: background 0.15s ease;
         }
         .btn-voice.recording {
             background: var(--rose);
@@ -712,36 +723,31 @@
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
+            70% { box-shadow: 0 0 0 8px rgba(225, 29, 72, 0); }
             100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
         }
 
         .symptom-chips-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 24px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
         .symptom-chip {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.84rem;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--text-secondary);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.15s ease;
             user-select: none;
-        }
-
-        .symptom-chip:hover {
-            border-color: var(--primary);
-            color: var(--primary);
         }
 
         .symptom-chip.selected {
@@ -753,79 +759,78 @@
 
         .vitals-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
         .vital-box {
             background: var(--surface-muted);
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 12px;
+            border-radius: var(--radius-sm);
+            padding: 8px;
             text-align: center;
         }
 
         .vital-title {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .vital-val {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* PICTORIAL DOSAGE & DELIVERY TRACKER */
+        /* POUCH & DOSAGE STICKERS */
         .pouch-visualizer {
             background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             border: 2px dashed var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 24px;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .pouch-tag {
             position: absolute;
-            top: -12px;
-            left: 24px;
+            top: -10px;
+            left: 16px;
             background: var(--primary);
             color: #ffffff;
-            font-size: 0.72rem;
+            font-size: 0.65rem;
             font-weight: 800;
-            padding: 4px 12px;
+            padding: 2px 10px;
             border-radius: 999px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .stickers-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 14px;
-            margin: 16px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 12px 0 6px;
         }
 
         .sticker-card {
             background: #ffffff;
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 14px;
+            border-radius: var(--radius-sm);
+            padding: 10px;
             text-align: center;
             box-shadow: var(--shadow-subtle);
         }
 
         .sticker-icon-box {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            margin: 0 auto 8px;
+            margin: 0 auto 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -835,39 +840,39 @@
         .sticker-food { background: #d1fae5; color: #059669; }
 
         .sticker-title {
-            font-size: 0.88rem;
+            font-size: 0.8rem;
             font-weight: 800;
             color: var(--text-primary);
         }
 
         .sticker-marathi {
-            font-size: 0.75rem;
+            font-size: 0.68rem;
             color: var(--text-muted);
             font-weight: 600;
         }
 
         .sticker-dose {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--primary-dark);
             font-weight: 700;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* RUNNER GPS TRACKER */
         .runner-tracker-box {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 24px;
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 16px;
         }
 
         .progress-track {
-            height: 8px;
+            height: 6px;
             background: var(--surface-muted);
             border-radius: 999px;
             overflow: hidden;
-            margin: 14px 0;
+            margin: 10px 0;
         }
 
         .progress-bar {
@@ -875,180 +880,150 @@
             background: linear-gradient(90deg, var(--teal), var(--primary));
             width: 70%;
             border-radius: 999px;
-            transition: width 0.5s ease;
         }
 
-        /* WHATSAPP CHAT RECEIVER */
+        /* WHATSAPP BUBBLE */
         .whatsapp-bubble {
             background: #e7fed9;
             border: 1px solid #d0f0c0;
-            border-radius: var(--radius-md);
-            padding: 16px;
+            border-radius: var(--radius-sm);
+            padding: 14px;
             max-width: 520px;
-            margin-bottom: 14px;
-            box-shadow: var(--shadow-subtle);
+            margin-bottom: 12px;
         }
 
         .whatsapp-bubble h4 {
-            font-size: 0.92rem;
+            font-size: 0.86rem;
             font-weight: 800;
             color: #075e54;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .whatsapp-bubble p {
-            font-size: 0.86rem;
-            line-height: 1.45;
+            font-size: 0.8rem;
+            line-height: 1.4;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .audio-player-btn {
             background: #ffffff;
             border: 1px solid #c8e6c9;
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: var(--radius-sm);
-            font-size: 0.8rem;
+            font-size: 0.74rem;
             font-weight: 700;
             color: #1b5e20;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
         }
 
         /* ==================== PORTAL 2: CLINIC KIOSK ==================== */
         .kiosk-grid {
-            max-width: 1200px;
-            margin: 24px auto 48px;
-            padding: 0 20px;
+            max-width: 1100px;
+            margin: 16px auto 32px;
+            padding: 0 16px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 900px) {
-            .kiosk-grid { grid-template-columns: 1fr; }
+            gap: 16px;
         }
 
         .camera-viewfinder {
             background: #0f172a;
-            border-radius: var(--radius-lg);
-            height: 220px;
+            border-radius: var(--radius-md);
+            height: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .camera-reticle {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             border: 2px dashed rgba(2, 132, 199, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: rotateScan 4s linear infinite;
-        }
-
-        @keyframes rotateScan {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         /* ==================== PORTAL 3: DOCTOR DESK ==================== */
         .doctor-layout {
-            max-width: 1300px;
-            margin: 24px auto 48px;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: 16px auto 32px;
+            padding: 0 16px;
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 960px) {
-            .doctor-layout { grid-template-columns: 1fr; }
+            grid-template-columns: 280px 1fr;
+            gap: 16px;
         }
 
         .queue-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 14px;
-            margin-bottom: 10px;
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
         }
-        .queue-card:hover, .queue-card.selected {
+        .queue-card.selected {
             border-color: var(--primary);
             background: var(--primary-light);
         }
 
         .consult-video-room {
             background: #0f172a;
-            border-radius: var(--radius-lg);
-            height: 240px;
+            border-radius: var(--radius-md);
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 16px;
         }
 
         /* ==================== PORTAL 4: DARK HUB & LAB ==================== */
         .hub-layout {
-            max-width: 1200px;
-            margin: 24px auto 48px;
-            padding: 0 20px;
+            max-width: 1100px;
+            margin: 16px auto 32px;
+            padding: 0 16px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 900px) {
-            .hub-layout { grid-template-columns: 1fr; }
+            gap: 16px;
         }
 
         /* ==================== PORTAL 5: RUNNER APP ==================== */
         .runner-wrap {
-            max-width: 500px;
-            margin: 24px auto 48px;
-            padding: 0 20px;
+            max-width: 440px;
+            margin: 16px auto 32px;
+            padding: 0 16px;
         }
 
-        /* TOAST NOTIFICATION */
+        /* TOAST */
         .toast {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 20px;
+            right: 20px;
             background: var(--text-primary);
             color: #ffffff;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            font-size: 0.86rem;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
             font-weight: 600;
             box-shadow: var(--shadow-float);
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             z-index: 200;
-            animation: slideUp 0.2s ease forwards;
         }
         .toast.active { display: flex; }
-
-        @keyframes slideUp {
-            from { transform: translateY(12px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -1080,7 +1055,7 @@
                 <svg class="icon"><use href="#icon-shield-check"/></svg>
             </div>
             <div class="brand-info">
-                <h1>ArogyaMitr <span style="font-weight: 500; font-size: 0.95rem;">(आरोग्यमित्र)</span></h1>
+                <h1>ArogyaMitr <span style="font-weight: 500; font-size: 0.88rem;">(आरोग्यमित्र)</span></h1>
                 <p>Govt. of Maharashtra • Rural Tele-Care & Supply Rails</p>
             </div>
         </div>
@@ -1104,7 +1079,7 @@
     </header>
 
     <main>
-        <!-- ==================== 1. ROLE GATEWAY VIEW ==================== -->
+        <!-- ==================== 1. ROLE GATEWAY VIEW (100% ONE-SCREEN FIT) ==================== -->
         <section id="view-gateway" class="view-section active">
             <div class="gateway-container">
                 <div class="gateway-hero">
@@ -1116,6 +1091,7 @@
                     <p>Connecting village clinics, MBBS tele-doctors, outskirts fulfillment dark hubs, and last-mile doorstep delivery runners.</p>
                 </div>
 
+                <!-- 5 CARDS IN A SINGLE BALANCED ROW -->
                 <div class="role-grid">
                     <!-- ROLE 1: CITIZEN SMARTPHONE -->
                     <div class="role-card citizen-role" onclick="openAuthModal('citizen')">
@@ -1128,10 +1104,10 @@
                             </div>
                             <h3 class="role-title">Citizen Portal</h3>
                             <div class="role-marathi">नागरिक मोबाईल सेवा</div>
-                            <p class="role-desc">For citizens with a smartphone: consult doctors online, track medicine delivery with pictorial stickers & view verified lab reports.</p>
+                            <p class="role-desc">Consult doctors, track medicine delivery with pictorial stickers & view verified lab reports.</p>
                         </div>
                         <div class="role-action-btn">
-                            <span>Enter Citizen App</span>
+                            <span>Enter App</span>
                             <svg class="icon-sm"><use href="#icon-check"/></svg>
                         </div>
                     </div>
@@ -1145,12 +1121,12 @@
                                 </div>
                                 <span class="role-tag tag-clinic">Outlet 1</span>
                             </div>
-                            <h3 class="role-title">Village Clinic Kiosk</h3>
+                            <h3 class="role-title">Village Clinic</h3>
                             <div class="role-marathi">गाव आरोग्य केंद्र (आशा)</div>
-                            <p class="role-desc">For ASHA workers & walk-in villagers without phones: Aadhaar FaceRD/OTP intake, smart vitals & clinic blood sample draw.</p>
+                            <p class="role-desc">Walk-in intake for patients without phones via FaceRD/OTP, vitals & clinic blood sample draw.</p>
                         </div>
                         <div class="role-action-btn">
-                            <span>Open Clinic Kiosk</span>
+                            <span>Open Kiosk</span>
                             <svg class="icon-sm"><use href="#icon-check"/></svg>
                         </div>
                     </div>
@@ -1164,9 +1140,9 @@
                                 </div>
                                 <span class="role-tag tag-doctor">Cloud Doctor</span>
                             </div>
-                            <h3 class="role-title">Medical Officer Desk</h3>
+                            <h3 class="role-title">Doctor Desk</h3>
                             <div class="role-marathi">डॉक्टर कन्सल्टेशन डेस्क</div>
-                            <p class="role-desc">For MBBS Medical Officers: live triage queue, 15kbps WebRTC consult, pictorial e-Prescriptions & lab test orders.</p>
+                            <p class="role-desc">Live triage queue, 15kbps WebRTC consult, pictorial e-Prescriptions & lab test orders.</p>
                         </div>
                         <div class="role-action-btn">
                             <span>Doctor Login</span>
@@ -1183,12 +1159,12 @@
                                 </div>
                                 <span class="role-tag tag-hub">Outlet 2</span>
                             </div>
-                            <h3 class="role-title">Dark Hub & Pathology</h3>
+                            <h3 class="role-title">Dark Hub & Lab</h3>
                             <div class="role-marathi">डार्क स्टोअर व प्रयोगशाळा</div>
-                            <p class="role-desc">For Pharmacists & Lab Techs: solar cold chain (4.2°C), pictorial dosage sticker sealing & batch blood test analyzer.</p>
+                            <p class="role-desc">Solar cold chain (4.2°C), pictorial dosage sticker sealing & batch blood test analyzer.</p>
                         </div>
                         <div class="role-action-btn">
-                            <span>Open Hub Workstation</span>
+                            <span>Hub Portal</span>
                             <svg class="icon-sm"><use href="#icon-check"/></svg>
                         </div>
                     </div>
@@ -1202,9 +1178,9 @@
                                 </div>
                                 <span class="role-tag tag-runner">Last-Mile</span>
                             </div>
-                            <h3 class="role-title">Delivery Runner App</h3>
+                            <h3 class="role-title">Runner App</h3>
                             <div class="role-marathi">वितरण धावपटू मोबाईल</div>
-                            <p class="role-desc">For Runners: turn-by-turn GPS doorstep delivery of pre-stickered medicines in 15-30 mins & reverse clinic sample pickup.</p>
+                            <p class="role-desc">Turn-by-turn GPS doorstep delivery in 15-30 mins & reverse clinic sample pickup.</p>
                         </div>
                         <div class="role-action-btn">
                             <span>Runner Portal</span>
@@ -1216,11 +1192,11 @@
                 <div class="gateway-metrics">
                     <div class="metric-item">
                         <div class="metric-val">15-30m</div>
-                        <div class="metric-lbl">Home Delivery Time</div>
+                        <div class="metric-lbl">Doorstep Delivery Time</div>
                     </div>
                     <div class="metric-item">
                         <div class="metric-val">70%</div>
-                        <div class="metric-lbl">CapEx Savings</div>
+                        <div class="metric-lbl">Govt. CapEx Savings</div>
                     </div>
                     <div class="metric-item">
                         <div class="metric-val">4.2°C</div>
@@ -1228,7 +1204,7 @@
                     </div>
                     <div class="metric-item">
                         <div class="metric-val">100%</div>
-                        <div class="metric-lbl">ABDM FHIR R4</div>
+                        <div class="metric-lbl">ABDM FHIR R4 Compliant</div>
                     </div>
                 </div>
             </div>
@@ -1273,7 +1249,7 @@
                         <label class="form-label">Full Name (नाव)</label>
                         <input type="text" id="reg-name" class="form-input" placeholder="e.g. Ramesh Shantaram Patil">
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                         <div class="form-group">
                             <label class="form-label">Age (वय)</label>
                             <input type="number" id="reg-age" class="form-input" placeholder="45">
@@ -1384,14 +1360,14 @@
                                 <svg class="icon"><use href="#icon-activity"/></svg>
                                 Clinical Symptom & Vitals Intake
                             </h3>
-                            <span style="font-size: 0.78rem; color: var(--teal); font-weight: 700;">Zero-Typing Voice AI Enabled</span>
+                            <span style="font-size: 0.75rem; color: var(--teal); font-weight: 700;">Zero-Typing Voice AI Enabled</span>
                         </div>
 
                         <!-- VERNACULAR VOICE MIC -->
                         <div class="voice-mic-box">
                             <div>
-                                <div style="font-size: 0.88rem; font-weight: 700;">Speak Symptoms in Marathi / Hindi</div>
-                                <div id="voice-transcript-txt" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">"३ दिवसांपासून तीव्र ताप आणि अंगदुखी आहे..."</div>
+                                <div style="font-size: 0.85rem; font-weight: 700;">Speak Symptoms in Marathi / Hindi</div>
+                                <div id="voice-transcript-txt" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">"३ दिवसांपासून तीव्र ताप आणि अंगदुखी आहे..."</div>
                             </div>
                             <button id="btn-citizen-mic" class="btn-voice" onclick="toggleVoiceIntake()">
                                 <svg class="icon-sm"><use href="#icon-mic"/></svg>
@@ -1400,7 +1376,7 @@
                         </div>
 
                         <!-- SYMPTOM CHIPS -->
-                        <div style="font-size: 0.82rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">
+                        <div style="font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">
                             Select Observed Symptoms:
                         </div>
                         <div class="symptom-chips-grid">
@@ -1410,11 +1386,11 @@
                             </div>
                             <div class="symptom-chip selected" onclick="toggleSymptom(this, 'Chills & Rigors')">
                                 <svg class="icon-sm"><use href="#icon-activity"/></svg>
-                                <span>Chills & Shivering (थंडी वाजणे)</span>
+                                <span>Chills (थंडी वाजणे)</span>
                             </div>
                             <div class="symptom-chip selected" onclick="toggleSymptom(this, 'Severe Body Ache')">
                                 <svg class="icon-sm"><use href="#icon-activity"/></svg>
-                                <span>Severe Body Ache (अंगदुखी)</span>
+                                <span>Body Ache (अंगदुखी)</span>
                             </div>
                             <div class="symptom-chip" onclick="toggleSymptom(this, 'Persistent Cough')">
                                 <svg class="icon-sm"><use href="#icon-activity"/></svg>
@@ -1422,7 +1398,7 @@
                             </div>
                             <div class="symptom-chip" onclick="toggleSymptom(this, 'Dizziness / Vertigo')">
                                 <svg class="icon-sm"><use href="#icon-activity"/></svg>
-                                <span>Dizziness (चक्कर येणे)</span>
+                                <span>Dizziness (चक्कर)</span>
                             </div>
                             <div class="symptom-chip" onclick="toggleSymptom(this, 'Nausea & Vomiting')">
                                 <svg class="icon-sm"><use href="#icon-activity"/></svg>
@@ -1435,33 +1411,33 @@
                         </div>
 
                         <!-- VITALS DIALS -->
-                        <div style="font-size: 0.82rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">
+                        <div style="font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">
                             Recorded Clinical Vitals:
                         </div>
                         <div class="vitals-grid">
                             <div class="vital-box">
                                 <div class="vital-title">Blood Pressure</div>
                                 <div class="vital-val" style="color: var(--amber);">138/88</div>
-                                <div style="font-size: 0.68rem; color: var(--text-muted);">mmHg</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">mmHg</div>
                             </div>
                             <div class="vital-box">
                                 <div class="vital-title">Temperature</div>
                                 <div class="vital-val" style="color: var(--rose);">102.8°F</div>
-                                <div style="font-size: 0.68rem; color: var(--text-muted);">High Fever</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">High Fever</div>
                             </div>
                             <div class="vital-box">
                                 <div class="vital-title">Oxygen (SpO2)</div>
                                 <div class="vital-val" style="color: var(--emerald);">97%</div>
-                                <div style="font-size: 0.68rem; color: var(--text-muted);">Normal</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Normal</div>
                             </div>
                             <div class="vital-box">
                                 <div class="vital-title">Pulse Rate</div>
                                 <div class="vital-val" style="color: var(--primary);">92</div>
-                                <div style="font-size: 0.68rem; color: var(--text-muted);">BPM</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">BPM</div>
                             </div>
                         </div>
 
-                        <button class="btn-primary" style="padding: 14px;" onclick="submitCitizenTriage()">
+                        <button class="btn-primary" style="padding: 12px;" onclick="submitCitizenTriage()">
                             <svg class="icon"><use href="#icon-stethoscope"/></svg>
                             <span>Request Live Doctor Consultation ➔</span>
                         </button>
@@ -1476,17 +1452,17 @@
                                 <svg class="icon"><use href="#icon-pill"/></svg>
                                 Active Prescribed Medicines & Dosage Visualizer
                             </h3>
-                            <span style="font-size: 0.78rem; color: var(--emerald); font-weight: 700;">Prescribed by Dr. Vivek Deshmukh</span>
+                            <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 700;">Dr. Vivek Deshmukh</span>
                         </div>
 
                         <!-- HEAT-SEALED POUCH VISUALIZER -->
                         <div class="pouch-visualizer">
                             <span class="pouch-tag">Sealed Dark Hub Medical Pouch</span>
-                            <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+                            <div style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary); margin-bottom: 2px;">
                                 Malaria ACT Kit + Paracetamol 650mg
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--text-secondary);">
-                                Standardized high-contrast pictorial dosage stickers affixed by Dark Hub Pharmacist:
+                            <p style="font-size: 0.76rem; color: var(--text-secondary);">
+                                Standardized pictorial dosage stickers affixed by Dark Hub Pharmacist:
                             </p>
 
                             <div class="stickers-row">
@@ -1523,10 +1499,10 @@
                         <div class="runner-tracker-box">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <div style="font-size: 0.9rem; font-weight: 800;">Live Doorstep Home Delivery</div>
-                                    <div style="font-size: 0.78rem; color: var(--text-muted);">Runner: Sandeep Korwate (e-Bike #04)</div>
+                                    <div style="font-size: 0.88rem; font-weight: 800;">Live Doorstep Home Delivery</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Runner: Sandeep Korwate (e-Bike #04)</div>
                                 </div>
-                                <span style="font-size: 0.85rem; font-weight: 800; color: var(--teal); background: var(--teal-light); padding: 4px 10px; border-radius: 6px;">
+                                <span style="font-size: 0.8rem; font-weight: 800; color: var(--teal); background: var(--teal-light); padding: 3px 8px; border-radius: 4px;">
                                     ETA: 14 Mins
                                 </span>
                             </div>
@@ -1535,7 +1511,7 @@
                                 <div class="progress-bar"></div>
                             </div>
 
-                            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">
                                 <span>Aheri Dark Hub</span>
                                 <span>En Route via Village Rd</span>
                                 <span>Laheri Doorstep</span>
@@ -1554,17 +1530,17 @@
                             </h3>
                         </div>
 
-                        <div style="background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; margin-bottom: 14px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="font-weight: 800; font-size: 0.92rem;">Complete Blood Count (CBC) + Malaria Antigen</span>
-                                <span style="font-size: 0.75rem; font-weight: 700; background: var(--emerald-light); color: var(--emerald); padding: 3px 8px; border-radius: 4px;">Verified</span>
+                        <div style="background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-weight: 800; font-size: 0.88rem;">Complete Blood Count (CBC) + Malaria Antigen</span>
+                                <span style="font-size: 0.7rem; font-weight: 700; background: var(--emerald-light); color: var(--emerald); padding: 2px 6px; border-radius: 4px;">Verified</span>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 0.82rem; margin: 10px 0;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-size: 0.78rem; margin: 8px 0;">
                                 <div><strong>Malaria:</strong> <span style="color: var(--emerald); font-weight: 700;">Negative</span></div>
                                 <div><strong>Hemoglobin:</strong> <span>11.4 g/dL</span></div>
                                 <div><strong>Platelets:</strong> <span>2.2 Lakh</span></div>
                             </div>
-                            <div style="font-size: 0.78rem; color: var(--text-muted);">Processed at: Aheri Cluster Hub Pathology Lab • Sample #SMP-LAHE-803</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">Processed at: Aheri Cluster Hub Pathology Lab • Sample #SMP-LAHE-803</div>
                         </div>
                     </div>
                 </div>
@@ -1600,7 +1576,6 @@
         <!-- ==================== 4. PORTAL: VILLAGE CLINIC KIOSK ==================== -->
         <section id="view-clinic" class="view-section">
             <div class="kiosk-grid">
-                <!-- LEFT: INTAKE & BIOMETRICS -->
                 <div class="clinical-card">
                     <div class="card-heading">
                         <h3>
@@ -1613,7 +1588,7 @@
                         <div class="camera-reticle">
                             <svg class="icon-xl"><use href="#icon-camera"/></svg>
                         </div>
-                        <div style="font-size: 0.78rem; margin-top: 10px; font-weight: 600;">FaceRD Biometric Camera Active</div>
+                        <div style="font-size: 0.75rem; margin-top: 8px; font-weight: 600;">FaceRD Biometric Camera Active</div>
                     </div>
 
                     <div class="form-group">
@@ -1621,7 +1596,7 @@
                         <input type="text" id="clinic-patient-aadhaar" class="form-input" value="9188 4219 4055">
                     </div>
 
-                    <button class="btn-primary" style="margin-bottom: 12px;" onclick="authenticateClinicPatient()">
+                    <button class="btn-primary" style="margin-bottom: 8px;" onclick="authenticateClinicPatient()">
                         <svg class="icon-sm"><use href="#icon-shield-check"/></svg>
                         <span>Scan Face / Fetch ABHA Record</span>
                     </button>
@@ -1632,7 +1607,6 @@
                     </button>
                 </div>
 
-                <!-- RIGHT: CLINICAL VITALS -->
                 <div class="clinical-card">
                     <div class="card-heading">
                         <h3>
@@ -1660,7 +1634,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-primary" style="padding: 14px; margin-top: 16px;" onclick="queueClinicToDoctor()">
+                    <button class="btn-primary" style="padding: 12px; margin-top: 14px;" onclick="queueClinicToDoctor()">
                         <svg class="icon"><use href="#icon-stethoscope"/></svg>
                         <span>Forward Vitals to Doctor Queue ➔</span>
                     </button>
@@ -1671,47 +1645,45 @@
         <!-- ==================== 5. PORTAL: DOCTOR DESK ==================== -->
         <section id="view-doctor" class="view-section">
             <div class="doctor-layout">
-                <!-- LEFT QUEUE -->
                 <div class="clinical-card">
                     <div class="card-heading">
                         <h3>
                             <svg class="icon-sm"><use href="#icon-activity"/></svg>
                             Waiting Queue
                         </h3>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--rose);">2 Active</span>
+                        <span style="font-size: 0.72rem; font-weight: 700; color: var(--rose);">2 Active</span>
                     </div>
 
                     <div class="queue-card selected">
-                        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.88rem;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem;">
                             <span>Baburao Madavi (54M)</span>
-                            <span style="color: var(--rose); font-size: 0.72rem;">HIGH RISK</span>
+                            <span style="color: var(--rose); font-size: 0.7rem;">HIGH RISK</span>
                         </div>
-                        <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">Laheri Hamlet 3 • High Fever (103.1°F), Chills</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Laheri Hamlet 3 • High Fever (103.1°F), Chills</div>
                     </div>
 
                     <div class="queue-card">
-                        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.88rem;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem;">
                             <span>Sunita Madavi (24F)</span>
-                            <span style="color: var(--amber); font-size: 0.72rem;">MODERATE</span>
+                            <span style="color: var(--amber); font-size: 0.7rem;">MODERATE</span>
                         </div>
-                        <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">Laheri Hamlet 2 • Pregnancy 32W, Anemia</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Laheri Hamlet 2 • Pregnancy 32W, Anemia</div>
                     </div>
                 </div>
 
-                <!-- RIGHT TELE-CONSULT & RX COMPOSER -->
                 <div class="clinical-card">
                     <div class="consult-video-room">
                         <div style="text-align: center;">
-                            <svg class="icon-xl" style="margin-bottom: 8px;"><use href="#icon-stethoscope"/></svg>
-                            <div style="font-weight: 700;">15kbps Ultra-Low Bandwidth WebRTC Bridge Active</div>
-                            <div style="font-size: 0.78rem; opacity: 0.8;">Connected to: Baburao Madavi (Laheri Village)</div>
+                            <svg class="icon-xl" style="margin-bottom: 6px;"><use href="#icon-stethoscope"/></svg>
+                            <div style="font-weight: 700; font-size: 0.9rem;">15kbps Ultra-Low Bandwidth WebRTC Bridge Active</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;">Connected to: Baburao Madavi (Laheri Village)</div>
                         </div>
                     </div>
 
                     <div class="card-heading">
                         <h3>
                             <svg class="icon"><use href="#icon-pill"/></svg>
-                            Electronic Prescription & Dosage Sticker Configuration
+                            Prescription & Dosage Stickers
                         </h3>
                     </div>
 
@@ -1720,15 +1692,15 @@
                         <input type="text" class="form-input" value="Artesunate + Lumefantrine (ACT Kit), Paracetamol 650mg">
                     </div>
 
-                    <div style="font-size: 0.8rem; font-weight: 700; margin-bottom: 8px;">Apply Pictorial Dosage Stickers:</div>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem;">
+                    <div style="font-size: 0.76rem; font-weight: 700; margin-bottom: 6px;">Apply Pictorial Dosage Stickers:</div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                        <label style="display: flex; align-items: center; gap: 5px; font-size: 0.78rem;">
                             <input type="checkbox" checked> ☀️ Morning (सकाळ)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem;">
+                        <label style="display: flex; align-items: center; gap: 5px; font-size: 0.78rem;">
                             <input type="checkbox" checked> 🌙 Night (रात्र)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem;">
+                        <label style="display: flex; align-items: center; gap: 5px; font-size: 0.78rem;">
                             <input type="checkbox" checked> 🍽️ After Food (जेवणानंतर)
                         </label>
                     </div>
@@ -1744,7 +1716,6 @@
         <!-- ==================== 6. PORTAL: DARK HUB & LAB ==================== -->
         <section id="view-hub" class="view-section">
             <div class="hub-layout">
-                <!-- LEFT: PHARMACY DISPATCH -->
                 <div class="clinical-card">
                     <div class="card-heading">
                         <h3>
@@ -1753,16 +1724,16 @@
                         </h3>
                     </div>
 
-                    <div style="background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; margin-bottom: 16px;">
-                        <div style="font-size: 0.82rem; font-weight: 700; color: var(--teal);">Solar Refrigerator Sensor</div>
-                        <div style="font-size: 1.4rem; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-primary);">4.2°C (Optimal)</div>
-                        <div style="font-size: 0.74rem; color: var(--text-muted);">Cold-Chain Backup: 100% Solar Battery Active</div>
+                    <div style="background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 12px;">
+                        <div style="font-size: 0.76rem; font-weight: 700; color: var(--teal);">Solar Refrigerator Sensor</div>
+                        <div style="font-size: 1.25rem; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-primary);">4.2°C (Optimal)</div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted);">Cold-Chain Backup: 100% Solar Battery Active</div>
                     </div>
 
                     <div class="pouch-visualizer">
                         <span class="pouch-tag">Sealed Pack #RX-802</span>
-                        <div style="font-weight: 800; margin-bottom: 4px;">Baburao Madavi • Laheri Village</div>
-                        <div style="font-size: 0.82rem; color: var(--text-secondary);">ACT Kit + Paracetamol (☀️ Morning + 🌙 Night stickers applied)</div>
+                        <div style="font-weight: 800; margin-bottom: 2px; font-size: 0.88rem;">Baburao Madavi • Laheri Village</div>
+                        <div style="font-size: 0.76rem; color: var(--text-secondary);">ACT Kit + Paracetamol (☀️ Morning + 🌙 Night stickers applied)</div>
                     </div>
 
                     <button class="btn-primary" onclick="hubDispatchToRunner()">
@@ -1771,7 +1742,6 @@
                     </button>
                 </div>
 
-                <!-- RIGHT: PATHOLOGY LAB -->
                 <div class="clinical-card">
                     <div class="card-heading">
                         <h3>
@@ -1785,7 +1755,7 @@
                         <input type="text" class="form-input" value="SMP-LAHE-803 (Baburao Madavi)" readonly>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                         <div class="form-group">
                             <label class="form-label">Malaria Antigen</label>
                             <select id="lab-malaria-val" class="form-select">
@@ -1817,22 +1787,22 @@
                             <svg class="icon"><use href="#icon-truck"/></svg>
                             Runner Logistics Mobile App
                         </h3>
-                        <span style="font-size: 0.78rem; font-weight: 700; color: var(--amber);">e-Bike #04</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--amber);">e-Bike #04</span>
                     </div>
 
-                    <div style="background: #0f172a; border-radius: var(--radius-md); height: 160px; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: #0f172a; border-radius: var(--radius-sm); height: 140px; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 12px;">
                         <svg class="icon-xl"><use href="#icon-truck"/></svg>
-                        <div style="font-weight: 700; margin-top: 6px;">GPS Navigation: Heading to Laheri Village</div>
-                        <div style="font-size: 0.78rem; opacity: 0.8;">ETA: 14 Mins • 4.2 km</div>
+                        <div style="font-weight: 700; margin-top: 4px; font-size: 0.88rem;">GPS Navigation: Heading to Laheri Village</div>
+                        <div style="font-size: 0.72rem; opacity: 0.8;">ETA: 14 Mins • 4.2 km</div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Destination Handover</label>
-                        <div style="font-weight: 800;">Baburao Madavi (Doorstep Home Delivery)</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Package: Pre-Stickered Medicine Pouch #RX-802</div>
+                        <div style="font-weight: 800; font-size: 0.88rem;">Baburao Madavi (Doorstep Home Delivery)</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Package: Pre-Stickered Medicine Pouch #RX-802</div>
                     </div>
 
-                    <button class="btn-primary" style="background: var(--emerald); padding: 14px;" onclick="confirmRunnerHandover()">
+                    <button class="btn-primary" style="background: var(--emerald); padding: 12px;" onclick="confirmRunnerHandover()">
                         <svg class="icon"><use href="#icon-check"/></svg>
                         <span>Confirm Doorstep Handover & Notify</span>
                     </button>
